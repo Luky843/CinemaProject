@@ -1,0 +1,11 @@
+.menu-section {
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background-color: #333;
+}
+
+.cinemaseat {
+    height:45px;
+    padding:5px;
+    cursor:pointer;
+}
