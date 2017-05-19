@@ -151,3 +151,35 @@ $(function () {
     });
 
 });
+
+
+function logIn()
+{
+    var userName = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length -1];
+            if (res == "-1" || res == "-2") {
+                document.getElementById("login_err_label").innerHTML;
+                if(res == "-1")
+                    document.getElementById("login_err_label").innerHTML = "wrong username or password";
+                else
+                    document.getElementById("login_err_label").innerHTML = "your account is deactivated";
+            } else {
+                sessionStorage.setItem("token", res);
+
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("login_err_label").innerHTML = "";
+            }
+        }
+    }
+    xhttp.open("GET", "./autorization.php?name="+userName+"&password="+password, true);
+    xhttp.send();
+
+}
