@@ -1,0 +1,56 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home - LTS Cinema</title>
+<style type="text/css">
+* {margin: 0; padding: 0;}
+canvas {display: block;}
+body {background: black;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script type="text/javascript">
+var c = document.getElementById("c");
+c.height = window.innerHeight;
+c.width = window.innerWidth;
+var drop_size = 12;
+var columns = c.width/drop_size;
+var chinese = "ムタ二コク1234567890シモラキリエスハヌトユABCDEFGH";
+var customtext = "LTSCinema";
+var customcolor= "#0fa";
+customtext = customtext.split("");
+chinese += chinese + chinese + chinese + chinese;
+chinese = chinese.split("");
+for(var i=0;i<chinese.length;i++)if(chinese[i]==customtext[0])chinese.splice(i,1);
+chinese.push(customtext[0]);
+var drops = [];
+for(var i = 0; i < columns; i++)
+drops[i] = 1; //y coordinate - same for everyone at the starting. The index contains the x coordinate
+ctx = c.getContext('2d');
+var customposition = [];
+var char = [];
+function draw(){
+ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+ctx.fillRect(0, 0, c.width, c.height);
+ctx.font= drop_size + "px arial";
+for(var i = 0; i < drops.length; i++){
+char[i] = chinese[Math.floor(Math.random()*chinese.length)];
+if(typeof customposition[i] == 'undefined')customposition[i]=-1;
+if((customposition[i] == -1) && (char[i] == customtext[0]) && (drops[i] != drops[i-1] - 1) && (i != 0))customposition[i]=0;
+if((customposition[i] >= 0) && (customposition[i] < customtext.length)){
+char[i]=customtext[customposition[i]];
+customposition[i]++;
+}
+if(customposition[i] >= 0){ctx.fillStyle = customcolor;}else{ctx.fillStyle = "#0d0";}
+if(customposition[i] == customtext.length)customposition[i]=-1;
+ctx.fillText(char[i], i*drop_size, drops[i]*drop_size);
+if(drops[i]*drop_size > c.height && Math.random() > 0.975)drops[i] = 0;
+drops[i]++;
+}}
+setInterval(draw, 66);
+</script>
+</body>
+</html>
