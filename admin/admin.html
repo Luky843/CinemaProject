@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="icon2.png" sizes="16x16">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Admin portal - LTS Cinema</title>
-
         <!-- Bootstrap -->
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- icons-->
@@ -14,9 +14,8 @@
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
         <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-        <!--template custom css file-->
+        <!--custom css file-->
         <link href="assets/css/style.css" rel="stylesheet">
-
         <script src="assets/js/modernizr.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,8 +25,6 @@
         <![endif]-->
     </head>
     <body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout">
-
-        <!--side navigation start-->
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             <!-- Static navbar -->
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -43,9 +40,10 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav scroll-to navbar-right">
-                            <li><a href="../index.html">Home</a></li>
-                            <li><a href="#">Users</a></li>
-                            <li><a href="login.html">Log in</a></li>
+                            <li><a href="admin.html">Home</a></li>
+                            <li><a href="users.html">Users</a></li>
+                            <li><a href="movies.html">Movies</a></li>
+                            <li><a href="index.html">Log out</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
@@ -71,7 +69,7 @@
                                 <div class="statistic-widget-box bg-danger">
                                     <i class="fa fa-usd"></i>
                                     <div class="content overflow-hidden">
-                                        <h1>89M $</h1>
+                                        <h1>22 000€</h1>
                                         <p>Total Profit</p>
                                     </div>
                                 </div><!--statistic box end-->
@@ -80,7 +78,7 @@
                                 <div class="statistic-widget-box bg-success">
                                     <i class="fa fa-users"></i>
                                     <div class="content overflow-hidden">
-                                        <h1>270+</h1>
+                                        <h1>45+</h1>
                                         <p>New Users</p>
                                     </div>
                                 </div><!--statistic box end-->
@@ -302,8 +300,6 @@
                 </section><!--end main content-->
             </div>
         </div><!--end wrapper-->
-
-
 
         <!--Common plugins-->
         <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
