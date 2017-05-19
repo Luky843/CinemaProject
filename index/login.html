@@ -28,7 +28,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body onload="loggedUser()">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -94,8 +94,9 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-sm-6 col-sm-offset-3">
-                                                                <input type="button" onclick="logIn()" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-yellow" value="Log In">
-                                                                <div id="login_err_label"></div>
+                                                                <div style="color:red; font-weight:bold; padding-bottom:10px;" id="login_err_label" class="text-center"></div>
+                                                                <div style="color:green; font-weight:bold; padding-bottom:10px;" id="login_scs_label" class="text-center"></div>
+                                                                <input type="button" onclick="logIn()" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-yellow" value="Log In">                                                            
                                                             </div>
                                                         </div>
                                                     </div>

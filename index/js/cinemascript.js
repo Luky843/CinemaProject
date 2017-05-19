@@ -2,16 +2,6 @@
 charset = "utf-8";
 var filmID = 1;
 
-function loggedUser() {
-    var token = sessionStorage.getItem("token");
-    if (token == "" || token == undefined || token == null) {
-        document.getElementById("state").innerHTML = "Log in";
-    }
-    else {
-        document.getElementById("state").innerHTML = "Log out";
-    }
-}
-
 function zmen(img_object,seatID) {
     token = sessionStorage.getItem("token");
     var xhttp = new XMLHttpRequest();
@@ -130,7 +120,7 @@ function showMovie(movie_id) {
 
 function Logout() {
     sessionStorage.setItem("token", "");
-    window.location = "http://ltscinema.wz.sk/";
+    window.location = "http://ltscinema.wz.sk/index/login.html";
 }
 
 $(function () {
@@ -153,8 +143,7 @@ $(function () {
 });
 
 
-function logIn()
-{
+function logIn(){
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
@@ -167,10 +156,21 @@ function logIn()
             if (res == "-1" || res == "-2") {
                 document.getElementById("login_err_label").innerHTML;
                 if(res == "-1")
-                    document.getElementById("login_err_label").innerHTML = "wrong username or password";
+                    document.getElementById("login_err_label").innerHTML = "Invalid username or password.";
                 else
-                    document.getElementById("login_err_label").innerHTML = "your account is deactivated";
+                    document.getElementById("login_err_label").innerHTML = "Your account is not activated.";
+                setTimeout(function () {
+                    document.getElementById("login_err_label").innerHTML = "";
+                }, 3 * 1000);
+                sessionStorage.setItem("token", res);
             } else {
+                document.getElementById("login_scs_label").innerHTML = "You have successfully logged in.";
+                setTimeout(function () {
+                    document.getElementById("login_scs_label").innerHTML = "";
+                }, 2 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "index.html" }, 500);
+                });
                 sessionStorage.setItem("token", res);
 
                 document.getElementById("username").value = "";
@@ -181,5 +181,31 @@ function logIn()
     }
     xhttp.open("GET", "./autorization.php?name="+userName+"&password="+password, true);
     xhttp.send();
+}
 
+function loggedUser() {
+    var token = sessionStorage.getItem("token");
+    if (token == "" || token == undefined || token == null) {
+        document.getElementById("state").innerHTML = "Log in";
+    }
+    else {
+        getUsername();
+        document.getElementById("state").innerHTML = "Log out";
+    }
+}
+
+function getUsername() {
+    token = sessionStorage.getItem("token");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            document.getElementById("user").innerHTML = res;
+        }
+    };
+    var url = "./getusername.php?token="+token;
+    xhttp.open("GET", url, true);
+    xhttp.send();
 }
