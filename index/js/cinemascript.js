@@ -120,7 +120,7 @@ function showMovie(movie_id) {
 
 function Logout() {
     sessionStorage.setItem("token", "");
-    window.location = "http://ltscinema.wz.sk/index/login.html";
+    window.location = "./login.html";
 }
 
 $(function () {
@@ -208,4 +208,56 @@ function getUsername() {
     var url = "./getusername.php?token="+token;
     xhttp.open("GET", url, true);
     xhttp.send();
+}
+
+
+function user_registration() {
+    var userName = document.getElementById("username_").value;
+    var email = document.getElementById("email_").value;
+    var password = document.getElementById("password_").value;
+    var confirm_pasword = document.getElementById("confirm-password_").value;
+    if (userName.length < 4) {
+        alert("userName.length < 4");
+        return;
+    }
+    if (password.length < 6){
+        alert("password.length < 6");
+        return;
+    }
+    if (password != confirm_pasword) {
+        alert("password != confirm_pasword");
+        return;
+    }
+    var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!patern.test(email)) {
+        alert("!patern.test(email)");
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+
+            if (res == "0") {
+                alert("reg succ");
+                document.getElementById("username_").value = "";
+                document.getElementById("email_").value = "";
+                document.getElementById("password_").value = "";
+                document.getElementById("confirm-password_").value = "";
+            } else if (res == "-2") {
+                alert("email exist in db");
+            }else if(res == "-3"){
+                alert("username exist in db");
+            } else {
+                alert("server err");
+            }
+        }
+    }
+    xhttp.open("GET", "./registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
+    xhttp.send();
+
+
 }
