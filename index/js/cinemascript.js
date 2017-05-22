@@ -189,9 +189,14 @@ function loggedUser() {
         document.getElementById("state").innerHTML = "Log in";
     }
     else {
-        getUsername();
         document.getElementById("state").innerHTML = "Log out";
+        getUsername();
+        showProfile();
     }
+}
+
+function showProfile() {
+    document.getElementById("profile").innerHTML = "My profile";
 }
 
 function getUsername() {
@@ -217,20 +222,32 @@ function user_registration() {
     var password = document.getElementById("password_").value;
     var confirm_pasword = document.getElementById("confirm-password_").value;
     if (userName.length < 4) {
-        alert("userName.length < 4");
-        return;
-    }
-    if (password.length < 6){
-        alert("password.length < 6");
-        return;
-    }
-    if (password != confirm_pasword) {
-        alert("password != confirm_pasword");
+        document.getElementById("username_err_label").innerHTML = "Length of username must be longer than 4characters.";
+        setTimeout(function () {
+            document.getElementById("username_err_label").innerHTML = "";
+        }, 2 * 1000);
         return;
     }
     var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!patern.test(email)) {
-        alert("!patern.test(email)");
+        document.getElementById("email_err_label").innerHTML = "Please enter valid email address!";
+        setTimeout(function () {
+            document.getElementById("email_err_label").innerHTML = "";
+        }, 2 * 1000);
+        return;
+    }
+    if (password.length < 6){
+        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 6characters.";
+        setTimeout(function () {
+            document.getElementById("pass_err_label").innerHTML = "";
+        }, 2 * 1000);
+        return;
+    }
+    if (password != confirm_pasword) {
+        document.getElementById("samepass_err_label").innerHTML = "Passwords do not match!";
+        setTimeout(function () {
+            document.getElementById("samepass_err_label").innerHTML = "";
+        }, 2 * 1000);
         return;
     }
 
@@ -242,15 +259,23 @@ function user_registration() {
             res = res[res.length - 1];
 
             if (res == "0") {
-                alert("reg succ");
+                document.getElementById("reg_succ").innerHTML = "Registration successful, please login!";
+                setTimeout(function () {
+                    document.getElementById("reg_succ").innerHTML = "";
+                }, 3 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "login.html" }, 800);
+                });
                 document.getElementById("username_").value = "";
                 document.getElementById("email_").value = "";
                 document.getElementById("password_").value = "";
                 document.getElementById("confirm-password_").value = "";
+                return;
             } else if (res == "-2") {
                 alert("email exist in db");
+                document.getElementById("email_err_label").innerHTML = "This email is used already used!";
             }else if(res == "-3"){
-                alert("username exist in db");
+                document.getElementById("username_err_label").innerHTML = "Username already exists!";
             } else {
                 alert("server err");
             }

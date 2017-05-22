@@ -46,6 +46,7 @@
                         <li><a href="index.html#movies">Movies</a></li>
                         <li><a href="index.html#events">News</a></li>
                         <li><a href="index.html#book-table">Contact</a></li>
+                        <li><a href="profile.html"><span id="profile"></span></a></li>
                         <li><a href="#" data-toggle="modal" data-target="#contact-modal">Log in</a></li>
                     </ul>
                 </div>
@@ -113,19 +114,24 @@
                                                 <form id="register-form" method="post" role="form" style="display: none;">
                                                     <div class="form-group">
                                                         <input type="text" name="username" id="username_" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                        <span id="username_err_label" class="text-center" style="color:red;"></span>
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="email" name="email" id="email_" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                                        <span id="email_err_label" class="text-center" style="color:red;"></span>
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="password" name="password" id="password_" tabindex="2" class="form-control" placeholder="Password">
+                                                        <span id="pass_err_label" class="text-center" style="color:red;"></span>
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="password" name="confirm-password" id="confirm-password_" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                                        <span id="samepass_err_label" class="text-center" style="color:red;"></span>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-sm-6 col-sm-offset-3">
+                                                                <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
                                                                 <input onclick="user_registration()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-yellow" value="Register Now">
                                                             </div>
                                                         </div>

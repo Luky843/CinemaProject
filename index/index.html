@@ -50,8 +50,17 @@
                         <li><a href="#movies">Movies</a></li>
                         <li><a href="#events">News</a></li>
                         <li><a href="#book-table">Contact</a></li>
-                        <li><a><i class="fa fa-user" aria-hidden="true"></i> <span id="user"></span></a></li>
-                        <li><a onclick="Logout()" style="cursor:pointer;"><span id="state"></span> <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user" aria-hidden="true"></i> <span id="user"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profile.html"><span id="profile"></span></a></li>
+                                <li><a onclick="Logout()" style="cursor:pointer;"><span id="state"></span> <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </li>                        
+                        <!--<li><a onclick="Logout()" style="cursor:pointer;"><span id="state"></span> <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>-->
                     </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
@@ -481,7 +490,7 @@
                 <div class="text-center">
                     <ul class="list-inline social">
                         <li><a target="_blank" href="https://sk-sk.facebook.com/itakademiasovy/"><i class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" href="https://github.com/Luky843/Cinema-Project"><i class="fa fa-github"></i></a></li>
+                        <li><a target="_blank" href="https://github.com/Luky843/CinemaProject"><i class="fa fa-github"></i></a></li>
                         <li><a target="_blank" href="https://trello.com/b/wJrDwq8w/lts-cinema"><i class="fa fa-trello"></i></a></li>
                     </ul>
                 </div>

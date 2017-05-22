@@ -29,7 +29,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout">
+    <body onload="getUsers()">
 
         <!--side navigation start-->
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
@@ -45,14 +45,14 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="http://luky843.wz.sk/index/">LTS Cinema</a>
+                            <a class="navbar-brand" href="http://ltscinema.wz.sk/index/">LTS Cinema</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav scroll-to navbar-right">
                                 <li><a href="admin.html">Home</a></li>
                                 <li><a href="users.html">Users</a></li>
                                 <li><a href="movies.html">Movies</a></li>
-                                <li><a href="index.html">Log out</a></li>
+                                <li><a onclick="Logout()" style="cursor:pointer">Log out</a></li>
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div><!--/.container-fluid -->
@@ -72,164 +72,18 @@
                                         <a href="newuser.html" type="button" title="Add new user" class="btn btn-success btn-circle btn-icon pull-right"><i class="fa fa-plus"></i></a>
                                     </div>
                                     <div class="panel-body">
-                                        <table id="datatable" class="table table-striped dt-responsive nowrap">
+                                        <table id="usersData" class="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>Username</th>
-                                                    <th>Is blocked</th>
+                                                    <th>Isblocked</th>
                                                     <th>Email</th>
-                                                    <th>Date of create</th>
-                                                    <th>Delete</th>
+                                                    <th>Date</th>
+                                                    <th>delete</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                <tr>
-                                                    <td>Peter565</td>
-                                                    <td>0</td>
-                                                    <td>peter565@azet.sk</td>
-                                                    <td>25/4/2017</td>
-                                                    <td><button type="button" title="Delete current user" class="btn btn-danger btn-circle btn-icon"><i class="fa fa-trash"></i></button></td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div><!--panel body end-->
@@ -264,10 +118,11 @@
         <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="assets/js/cinemascript.js"></script>
         <script>
             $(document).ready(function() {
-        $('#datatable').dataTable();
-        });
+                $('#datatable').dataTable();
+            });
         </script>
     </body>
 </html>
