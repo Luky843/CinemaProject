@@ -84,6 +84,25 @@ function getUsers() {
     xhttp.send();
 }
 
+function DeleteRow(r) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#F44336",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },
+        function deleteRow() {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("MyTable").deleteRow(i);
+            swal("Deleted!", "Current row has been deleted.", "success");
+
+        });
+    }
+
+
 function user_registration() {
     var userName = document.getElementById("username_").value;
     var email = document.getElementById("email_").value;
