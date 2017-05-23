@@ -9,7 +9,7 @@ function Logout() {
 }
 
 function VerifyToken() {
-    if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2' || sessionStorage.getItem("token") == 'null') {
+    if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2' || sessionStorage.getItem("token") == null) {
         $(document).ready(function () {
              window.location.href = "./page-404.html";
         });
