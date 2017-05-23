@@ -283,6 +283,4 @@ function user_registration() {
     }
     xhttp.open("GET", "./registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
     xhttp.send();
-
-
 }

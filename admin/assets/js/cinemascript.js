@@ -96,7 +96,7 @@ function DeleteRow(r) {
         },
         function deleteRow() {
             var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("MyTable").deleteRow(i);
+            document.getElementById("usersData").deleteRow(i);
             swal("Deleted!", "Current row has been deleted.", "success");
 
         });
@@ -107,7 +107,6 @@ function user_registration() {
     var userName = document.getElementById("username_").value;
     var email = document.getElementById("email_").value;
     var password = document.getElementById("password_").value;
-    var confirm_pasword = document.getElementById("confirm-password_").value;
     if (userName.length < 4) {
         document.getElementById("username_err_label").innerHTML = "Length of username must be longer than 4characters.";
         setTimeout(function () {
@@ -122,10 +121,11 @@ function user_registration() {
         }, 2 * 1000);
         return;
     }
-    if (password != confirm_pasword) {
-        document.getElementById("samepass_err_label").innerHTML = "Passwords do not match!";
+    var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!patern.test(email)) {
+        document.getElementById("email_err_label").innerHTML = "Please enter valid email address!";
         setTimeout(function () {
-            document.getElementById("samepass_err_label").innerHTML = "";
+            document.getElementById("email_err_label").innerHTML = "";
         }, 2 * 1000);
         return;
     }
@@ -138,17 +138,16 @@ function user_registration() {
             res = res[res.length - 1];
 
             if (res == "0") {
-                document.getElementById("reg_succ").innerHTML = "Registration successful, please login!";
+                document.getElementById("reg_succ").innerHTML = "Registration successful!";
                 setTimeout(function () {
                     document.getElementById("reg_succ").innerHTML = "";
                 }, 3 * 1000);
                 $(document).ready(function () {
-                    window.setTimeout(function () { window.location.href = "admin.html" }, 800);
+                    window.setTimeout(function () { window.location.href = "users.html" }, 800);
                 });
                 document.getElementById("username_").value = "";
                 document.getElementById("email_").value = "";
                 document.getElementById("password_").value = "";
-                document.getElementById("confirm-password_").value = "";
                 return;
             } else if (res == "-2") {
                 document.getElementById("email_err_label").innerHTML = "This email is used already used!";

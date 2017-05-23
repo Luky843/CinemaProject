@@ -45,7 +45,7 @@
 		$db_cr = get_DB_config();
 		$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
 	
-		$sql = "select * from users where name like'".$GLOBALS["name"]."' and password like'".$GLOBALS["password"]."';";
+		$sql = "select * from users where name like'".$GLOBALS["name"]."' and password like'".$GLOBALS["password"]."' and isAdmin=1;";
 		$result = $conn->query($sql);
 		
 		$output = "-1";
