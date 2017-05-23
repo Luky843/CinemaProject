@@ -24,7 +24,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout">
+    <body onload="VerifyToken(); getCounts()">
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             <!-- Static navbar -->
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -78,7 +78,7 @@
                                 <div class="statistic-widget-box bg-success">
                                     <i class="fa fa-users"></i>
                                     <div class="content overflow-hidden">
-                                        <h1>45+</h1>
+                                        <h1 id="count"></h1>
                                         <p>New Users</p>
                                     </div>
                                 </div><!--statistic box end-->

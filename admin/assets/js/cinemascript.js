@@ -8,6 +8,14 @@ function Logout() {
     window.location = "./index.html";
 }
 
+function VerifyToken() {
+    if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2') {
+        $(document).ready(function () {
+             window.location.href = "./page-404.html";
+        });
+    };
+}
+
 function logIn(){
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -45,6 +53,22 @@ function logIn(){
         }
     }
     xhttp.open("GET", "./autorization.php?name="+userName+"&password="+password, true);
+    xhttp.send();
+}
+
+function getCounts() {
+    var count = document.getElementById("count");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            count.innerHTML = res;
+        }
+    }
+    xhttp.open("GET", "./getcount.php");
     xhttp.send();
 }
 
