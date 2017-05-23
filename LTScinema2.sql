@@ -7,14 +7,16 @@ create table  users (idu int auto_increment,
 					password varchar(30),
 					email varchar(30),
 					isAdmin int default 0,
-					isBlocked int default 1,
+					isBlocked int default 0,
 					time_of_regisration datetime,
+					isDeleted int default 0,
 					primary key (idu) 
 					);
 					
 
 create table movies (idm int auto_increment,
 					name varchar(30),
+					genre varchar(15),
 					description text,
 					actors text,
 					year_ int,

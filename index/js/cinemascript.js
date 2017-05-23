@@ -284,3 +284,46 @@ function user_registration() {
     xhttp.open("GET", "./registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
     xhttp.send();
 }
+
+
+function passchange()
+{
+    var oldPassword = document.getElementById("password_ch1").value;
+    var newPassword = document.getElementById("password_ch2").value;
+    var confNewPass = document.getElementById("password_ch3").value;
+    var token = sessionStorage.getItem("token");
+
+    if (newPassword.length < 6) {
+        alert("newPassword.length");
+        return;
+    }
+    if (newPassword != confNewPass) {
+        alert("newPassword != confNewPass")
+        return;
+    }
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+
+            if (res == "-2") {
+                alert("incorrect oldPAssword");
+                return;
+            } else if (res == "0") {
+                alert("OK!");
+                document.getElementById("password_ch1").value = "";
+                document.getElementById("password_ch2").value = "";
+                document.getElementById("password_ch3").value = "";
+            } else {
+                alert("server err");
+            }
+        }
+    }
+    var url = "./changepassword.php?token=" + token + "&oldpassword=" + oldPassword + "&newpassword="+newPassword;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+
+}
