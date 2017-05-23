@@ -19,7 +19,7 @@ $email_subject = "New message from:  $name";
 $email_body = "You have received a new message. \n\n".
 				  "Here are the details:\n \nName: $name \n".
 				  "Email: $email_address\nMessage: $message";
-$headers = "From: noreply@ltscinema.wz.sk\n";
+$headers = "From: LTS-Cinema@info.wz.sk\n";
 $headers .= "Reply-To: $email_address";	
 mail($to,$email_subject,$email_body,$headers);
 return true;			
