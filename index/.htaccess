@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule   db_configt\.conf   /index.html   [R]

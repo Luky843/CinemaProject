@@ -221,7 +221,8 @@ function user_registration() {
     var email = document.getElementById("email_").value;
     var password = document.getElementById("password_").value;
     var confirm_pasword = document.getElementById("confirm-password_").value;
-    if (userName.length < 4) {
+	var filter = /^[a-zA-Z ]{4,25}$/;
+    if (!filter.test(userName)) {
         document.getElementById("username_err_label").innerHTML = "Length of username must be longer than 4characters.";
         setTimeout(function () {
             document.getElementById("username_err_label").innerHTML = "";
@@ -236,8 +237,9 @@ function user_registration() {
         }, 2 * 1000);
         return;
     }
-    if (password.length < 6){
-        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 6characters.";
+    var passfilter=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    if (!passfilter.test(password)){
+        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 8characters and contains number,lowercase and uppercase letter.";
         setTimeout(function () {
             document.getElementById("pass_err_label").innerHTML = "";
         }, 2 * 1000);
