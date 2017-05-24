@@ -174,7 +174,7 @@ function user_registration() {
                 document.getElementById("password_").value = "";
                 return;
             } else if (res == "-2") {
-                document.getElementById("email_err_label").innerHTML = "This email is used already used!";
+                document.getElementById("email_err_label").innerHTML = "This email is already used!";
             }else if(res == "-3"){
                 document.getElementById("username_err_label").innerHTML = "Username already exists!";
             } else {

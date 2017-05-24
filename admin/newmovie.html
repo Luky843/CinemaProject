@@ -20,6 +20,9 @@
         <!--custom css file-->
         <link href="assets/css/style.css" rel="stylesheet">
         <script src="assets/js/modernizr.js"></script>
+        <!--dropzone-->
+        <link href="assets/plugins/dropzone/basic.css" rel="stylesheet">
+        <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -72,18 +75,49 @@
                                                 <input type="text" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>Help Text</label>
-                                                <input type="text" class="form-control">
-                                                <span class="help-block m-b-none">This is a example of help text input</span>
+                                                <label>Genre</label>
+                                                <input type="text" class="form-control" placeholder="Action / Comedy..">
                                             </div>
                                             <div class="form-group">
-                                                <label>Placeholder</label>
-                                                <input type="text" class="form-control" placeholder="placeholder">
+                                                <label>IMG URL</label>
+                                                <input type="text" class="form-control">
+                                                <span class="help-block m-b-none">Our images are stored on server, please add here url.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Actors</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Date of create</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea type="text" name="description" tabindex="10" rows="7" class="form-control" maxlength="2048"></textarea>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                        </div>
+                                        <h2 class="panel-title">Dropzone <span class="helping-text">Drag & drop file upload</span></h2>
+                                    </header>
+                                    <div class="panel-body">
+                                        <form id="my-awesome-dropzone" action="#" class="dropzone">
+                                            <button type="submit" class="btn btn-success rounded pull-right">Submit!</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div><!--container end-->
 
@@ -108,13 +142,17 @@
         <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/cinemascript.js"></script>
-        <!-- Datatables-->
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <!-- DROPZONE -->
+        <script src="assets/plugins/dropzone/dropzone.js"></script>
         <script>
-            $(document).ready(function() {
-        $('#datatable').dataTable();
-        });
+            $(document).ready(function () {
+                Dropzone.options.myAwesomeDropzone = {
+                    autoProcessQueue: false,
+                    uploadMultiple: true,
+                    parallelUploads: 100,
+                    maxFiles: 100
+                };
+            });
         </script>
     </body>
 </html>

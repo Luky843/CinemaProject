@@ -294,11 +294,11 @@ function passchange()
     var token = sessionStorage.getItem("token");
 
     if (newPassword.length < 6) {
-        alert("newPassword.length");
+        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 6characters.";
         return;
     }
     if (newPassword != confNewPass) {
-        alert("newPassword != confNewPass")
+        document.getElementById("samepass_err_label").innerHTML = "Passwords do not match!";
         return;
     }
 
@@ -310,15 +310,18 @@ function passchange()
             res = res[res.length - 1];
 
             if (res == "-2") {
-                alert("incorrect oldPAssword");
+                document.getElementById("oldpass_err_label").innerHTML = "Incorrect old password!";
                 return;
             } else if (res == "0") {
-                alert("OK!");
+                document.getElementById("pass_scs_label").innerHTML = "Your password has been changed successfully!";
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "index.html" }, 800);
+                });
                 document.getElementById("password_ch1").value = "";
                 document.getElementById("password_ch2").value = "";
                 document.getElementById("password_ch3").value = "";
             } else {
-                alert("server err");
+                document.getElementById("pass_err_label").innerHTML = "Server error!";
             }
         }
     }

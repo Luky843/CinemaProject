@@ -74,14 +74,19 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password_ch1" tabindex="1" class="form-control" placeholder="Old password">
+                                    <span id="oldpass_err_label" class="text-center" style="color:red;"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password_ch2" tabindex="2" class="form-control" placeholder="New Password">
+                                    <span id="pass_err_label" class="text-center" style="color:red;"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password_ch3" tabindex="3" class="form-control" placeholder="Repeat new password">
+                                    <span id="samepass_err_label" class="text-center" style="color:red;"></span>
                                 </div>
                                 <div class="col-sm-6 col-sm-offset-3">
+                                    <div style="color:red; font-weight:bold; padding-bottom:10px;" id="pass_err_label" class="text-center"></div>
+                                    <div style="color:green; font-weight:bold; padding-bottom:10px;" id="pass_scs_label" class="text-center"></div>
                                     <div id="change_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
                                     <input onclick="passchange()" type="button" name="change-pass-submit" id="pass-submit" tabindex="4" class="form-control btn btn-yellow" value="Submit">
                                 </div>
