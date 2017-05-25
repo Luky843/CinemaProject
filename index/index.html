@@ -28,7 +28,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body data-spy="scroll" onload="loggedUser()">
+    <body data-spy="scroll" onload="loggedUser(); loadMovies()">
         <!-- Static navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -102,101 +102,13 @@
                 </div><!--section title-->
                 <div class="row">
                     <div class="col-sm-5 col-sm-offset-1">
-                        <ul class="menu-style list-unstyled">
-                            <li class="clearfix">
-                                <img src="img/movies/1.jpg" class="img-responsive" width="90" alt="menu-img">
+                        <ul class="menu-style list-unstyled" id="index_list_left">
 
-                                <div class="detail">
-                                    <h4> VOTRELEC: COVENANT</h4>
-                                    Ridley Scott sa vracia do vesmíru, ktorý stvoril vo svojej kultovej sérii Votrelec.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/2.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>DEEP: DOBRODRUŽSTVO POD HLADINOU</h4>
-                                    Malý veľký hrdina oceánu.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/3.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>FRANCÚZSKO</h4>
-                                    Francúzsko inak, intímne...
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/4.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>PUTOVANIE TUČNIAKOV: VOLANIE OCEÁNU</h4>
-                                    Príbeh malého tučniaka z ľadového kráľovstva vzdialenej Antarktídy, pripravujúceho sa na svoju prvú cestu k moru...
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/5.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>OLLI MÄKI</h4>
-                                    Príbeh fínskeho boxera Olliho Mäkiho, ktorý sa preboxoval k najšťastnejšiemu dňu jeho života.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                     <div class="col-sm-5">
-                        <ul class="menu-style list-unstyled">
-                            <li class="clearfix">
-                                <img src="img/movies/6.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>KRÁĽ ARTUŠ: LEGENDA O MEČI</h4>
-                                    Guy Ritchie a jeho originálna verzia legendy o kráľovi Artušovi a čarovnom meči.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/7.jpg" class="img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>PÁD</h4>
-                                    Podľa prvého dielu úspešnej knižnej série Anjeli.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/8.jpg" class=" img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>LADY MACBETH</h4>
-                                    Navzdory manželstvu z rozumu a bez lásky sa svojhlavá mladá žena rozhodne určiť svoj vlastný osud.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/9.jpg" class=" img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>PO BÚRKE</h4>
-                                    Najsilnejšie búrky sú tie, pri ktorých sa nepohne ani lístok.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="img/movies/10.jpg" class=" img-responsive" width="90" alt="menu-img">
-
-                                <div class="detail">
-                                    <h4>BABY ŠÉF</h4>
-                                    Rodený vodca.
-                                    <span class="price">6.50€</span>
-                                </div>
-                            </li>
+                        <ul class="menu-style list-unstyled" id="index_list_right">
+                            
                         </ul>
                     </div>
                 </div>

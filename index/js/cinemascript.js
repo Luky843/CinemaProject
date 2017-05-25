@@ -339,10 +339,45 @@ function loadMovies()
         if (this.status == 200 && this.readyState == 4) {
             var res = this.response;
             res = res.split("##");
-            res = res[res.length];
+            res = res[res.length -1];
+            console.log(res);
             res = JSON.parse(res);
+            for (var i = 0; i < res.length; i++) {
+                if (i % 2 == 0) {
+                    console.log("call left");
+                    var list = document.getElementById("index_list_left");
+                    var item = document.createElement("li");
+                    var img = document.createElement("img");
 
-            //tu som skoncil
+                    img.src = res[i].img_url;
+                    img.className = "img-responsive";
+                    img.width = "90";
+                    img.alt = "menu-img";
+                    item.appendChild(img);
+
+                    var detail = document.createElement("div");
+                    detail.className = "detail";
+                    detail.innerHTML = "<h4>" + res[i].name + "</h4>" + res[i].description + '<span class="price">6.50€</span>';
+                    item.appendChild(detail);
+                    list.appendChild(item);
+                } else {
+                    var list = document.getElementById("index_list_right");
+                    var item = document.createElement("li");
+                    var img = document.createElement("img");
+
+                    img.src = res[i].img_url;
+                    img.className = "img-responsive";
+                    img.width = 90;
+                    img.alt = "menu-img";
+                    item.appendChild(img);
+
+                    var detail = document.createElement("div");
+                    detail.className = "detail";
+                    detail.innerHTML = "<h4>" + res[i].name + "</h4>" + res[i].description + '<span class="price">6.50€</span>';
+                    item.appendChild(detail);
+                    list.appendChild(item);
+                }
+            }
         }
     }
     xhhtp.open("GET", "./php/get_list_of_films.php", true);
