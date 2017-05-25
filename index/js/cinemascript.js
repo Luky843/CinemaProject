@@ -346,6 +346,7 @@ function loadMovies()
                     console.log("call left");
                     var list = document.getElementById("index_list_left");
                     var item = document.createElement("li");
+                    item.className = "clearfix";
                     var img = document.createElement("img");
 
                     img.src = res[i].img_url;
