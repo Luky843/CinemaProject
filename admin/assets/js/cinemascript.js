@@ -70,6 +70,8 @@ function getCounts() {
     xhttp.send();
 }
 
+
+
 function getUsers() {
     var id = document.getElementById("id");
     var name = document.getElementById("name");
@@ -90,7 +92,7 @@ function getUsers() {
                 var row = table.insertRow(table.rows.length);
 
                 var cell1 = row.insertCell(0);
-                cell1.innerHTML = '<b><span class="bigger">' + res[i].name + '</span></b>';
+                cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
                 var cell2 = row.insertCell(1);
                 cell2.innerHTML = '<b><span class="bigger">' + res[i].isblocked + '</span></b>';
                 var cell3 = row.insertCell(2);
