@@ -340,7 +340,6 @@ function loadMovies()
             var res = this.response;
             res = res.split("##");
             res = res[res.length -1];
-            console.log(res);
             res = JSON.parse(res);
             for (var i = 0; i < res.length; i++) {
                 if (i % 2 == 0) {
