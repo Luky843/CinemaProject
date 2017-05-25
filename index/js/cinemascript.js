@@ -24,7 +24,7 @@ function zmen(img_object,seatID) {
             }
         }
     };
-    var url = "http://ltscinema.wz.sk/cinema/change_seat_status.php?token=" + token + "&movie=" + filmID + "&seat=" + seatID;
+    var url = "./php/change_seat_status.php?token=" + token + "&movie=" + filmID + "&seat=" + seatID;
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -113,7 +113,7 @@ function showMovie(movie_id) {
             showAvailability(res);
         }
     };
-    var url = "http://ltscinema.wz.sk/cinema/get_list_of_seats.php?token=" + token + "&movie=" + movie_id;
+    var url = "./php/get_list_of_seats.php?token=" + token + "&movie=" + movie_id;
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -179,7 +179,7 @@ function logIn(){
             }
         }
     }
-    xhttp.open("GET", "./autorization.php?name="+userName+"&password="+password, true);
+    xhttp.open("GET", "./php/autorization.php?name="+userName+"&password="+password, true);
     xhttp.send();
 }
 
@@ -210,7 +210,7 @@ function getUsername() {
             document.getElementById("user").innerHTML = res;
         }
     };
-    var url = "./getusername.php?token="+token;
+    var url = "./php/getusername.php?token="+token;
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -283,7 +283,7 @@ function user_registration() {
             }
         }
     }
-    xhttp.open("GET", "./registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
+    xhttp.open("GET", "./php/registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
     xhttp.send();
 }
 
@@ -327,7 +327,7 @@ function passchange()
             }
         }
     }
-    var url = "./changepassword.php?token=" + token + "&oldpassword=" + oldPassword + "&newpassword="+newPassword;
+    var url = "./php/changepassword.php?token=" + token + "&oldpassword=" + oldPassword + "&newpassword="+newPassword;
     xhttp.open("GET", url, true);
     xhttp.send();
 
@@ -346,6 +346,6 @@ function loadMovies()
             //tu som skoncil
         }
     }
-    xhhtp.open("GET", "./get_list_of_films.php", true);
+    xhhtp.open("GET", "./php/get_list_of_films.php", true);
     xhhtp.send();
 }
