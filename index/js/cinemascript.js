@@ -274,7 +274,6 @@ function user_registration() {
                 document.getElementById("confirm-password_").value = "";
                 return;
             } else if (res == "-2") {
-                alert("email exist in db");
                 document.getElementById("email_err_label").innerHTML = "This email is used already used!";
             }else if(res == "-3"){
                 document.getElementById("username_err_label").innerHTML = "Username already exists!";
