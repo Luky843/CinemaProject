@@ -10,9 +10,7 @@ function Logout() {
 
 function VerifyToken() {
     if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2' || sessionStorage.getItem("token") == null) {
-        $(document).ready(function () {
              window.location.href = "./page-404.html";
-        });
     };
 }
 
@@ -52,7 +50,7 @@ function logIn(){
             }
         }
     }
-    xhttp.open("GET", "./autorization.php?name="+userName+"&password="+password, true);
+    xhttp.open("GET", "./php/autorization.php?name="+userName+"&password="+password, true);
     xhttp.send();
 }
 
@@ -68,7 +66,7 @@ function getCounts() {
             count.innerHTML = res;
         }
     }
-    xhttp.open("GET", "./getcount.php");
+    xhttp.open("GET", "./php/getcount.php");
     xhttp.send();
 }
 
@@ -104,7 +102,7 @@ function getUsers() {
             }
         }
     }
-    xhttp.open("GET", "./getusers.php");
+    xhttp.open("GET", "./php/getusers.php");
     xhttp.send();
 }
 
@@ -184,6 +182,6 @@ function user_registration() {
             }
         }
     }
-    xhttp.open("GET", "./registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
+    xhttp.open("GET", "./php/registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
     xhttp.send();
 }
