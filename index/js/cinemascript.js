@@ -332,3 +332,20 @@ function passchange()
     xhttp.send();
 
 }
+
+function loadMovies()
+{
+    var xhhtp = new XMLHttpRequest();
+    xhhtp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length];
+            res = JSON.parse(res);
+
+            //tu som skoncil
+        }
+    }
+    xhhtp.open("GET", "./get_list_of_films.php", true);
+    xhhtp.send();
+}
