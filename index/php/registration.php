@@ -36,12 +36,23 @@ function isUsernameUnique($name)
 	return $isUnique;
 }
 
+function generateRandomCardNumber($length = 10) {
+		$characters = '0123456789';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+
 function createNewUser($email,$password,$username)
 {
+	$randomString = generateRandomCardNumber();
 	$datetime = date("Y-m-d H:i:s");
 	$data_conf = get_DB_config();
 	$conn = new mysqli($data_conf[0],$data_conf[1],$data_conf[2],$data_conf[3]);
-	$sql = "insert into users(name,password,email,time_of_regisration,isBlocked) values('".$username."','".$password."','".$email."','".$datetime."',0);";
+	$sql = "insert into users(name,password,email,time_of_regisration,cardnumber,isBlocked) values('".$username."','".$password."','".$email."','".$datetime."','".$randomString."',0);";
 	$conn->query($sql);
 	$conn->close();
 }

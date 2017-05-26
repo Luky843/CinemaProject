@@ -8,6 +8,7 @@ create table  users (idu int auto_increment,
 					email varchar(30),
 					isAdmin int default 0,
 					isBlocked int default 0,
+		     			cardnumber varchar(10),
 					time_of_regisration datetime,
 					isDeleted int default 0,
 					primary key (idu) 

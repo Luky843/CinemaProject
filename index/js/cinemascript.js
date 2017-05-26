@@ -190,6 +190,7 @@ function loggedUser() {
     }
     else {
         document.getElementById("state").innerHTML = "Log out";
+        getCardNumber();
         getUsername();
         showProfile();
     }
@@ -211,6 +212,22 @@ function getUsername() {
         }
     };
     var url = "./php/getusername.php?token="+token;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+function getCardNumber() {
+    token = sessionStorage.getItem("token");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            document.getElementById("card").innerHTML = res;
+        }
+    };
+    var url = "./php/getcardnumber.php?token=" + token;
     xhttp.open("GET", url, true);
     xhttp.send();
 }
