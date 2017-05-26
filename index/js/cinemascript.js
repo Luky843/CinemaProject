@@ -402,3 +402,26 @@ function loadMovies()
     xhhtp.open("GET", "./php/get_list_of_films.php", true);
     xhhtp.send();
 }
+
+
+function loadGenres()
+{
+    var xhhp = new XMLHttpRequest();
+    xhhp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+
+            for (var i = 0; i < res.length; i++) {
+                var opt = document.createElement("option");
+                opt.innerHTML = res[i];
+                opt.value = res[i];
+                document.getElementById("sel1").appendChild(opt);
+            }
+        }
+    }
+    xhhp.open("GET", "./php/load_genres.php", true);
+    xhhp.send();
+}

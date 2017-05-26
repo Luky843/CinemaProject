@@ -28,7 +28,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body onload="loggedUser()">
+    <body onload="loggedUser(); loadGenres()">
         <!-- Static navbar -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -79,7 +79,6 @@
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 form-group">
                         <select class="form-control" id="sel1">
-                            <option id="genre">1</option>
                         </select>
                     </div>
                     <div class="col-sm-5 col-sm-offset-1">
