@@ -70,7 +70,57 @@ function getCounts() {
     xhttp.send();
 }
 
+function getCountsMovies() {
+    var count = document.getElementById("moviesCount");
 
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            count.innerHTML = res;
+        }
+    }
+    xhttp.open("GET", "./php/getcountMovies.php");
+    xhttp.send();
+}
+
+function getMovies() {
+    var id = document.getElementById("idm");
+    var name = document.getElementById("name");
+    var genre = document.getElementById("genre");
+    var description = document.getElementById("description");
+    var actors = document.getElementById("actors");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+            for (var i = 0; i < res.length; i++) {
+                var table = document.getElementById("movieData");
+                var row = table.insertRow(table.rows.length);
+                row.id = "User_" + res[i].id;
+
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = '<b><span class="bigger">' + res[i].genre + '</span></b>';
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = res[i].description;
+                var cell4 = row.insertCell(3);
+                cell4.innerHTML = res[i].actors;
+                var cell5 = row.insertCell(4);
+                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteRow(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
+            }
+        }
+    }
+    xhttp.open("GET", "./php/get_list_of_films.php");
+    xhttp.send();
+}
 
 function getUsers() {
     var id = document.getElementById("id");

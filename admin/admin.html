@@ -24,7 +24,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body onload="VerifyToken(); getCounts()">
+    <body onload="VerifyToken(); getCounts(); getCountsMovies()">
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             <!-- Static navbar -->
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -61,7 +61,7 @@
                                     <i class="fa fa-shopping-bag"></i>
                                     <div class="content overflow-hidden">
                                         <h1>7495</h1>
-                                        <p>New Orders</p>
+                                        <p>Total booked movies</p>
                                     </div>
                                 </div><!--statistic box end-->
                             </div><!--col end-->
@@ -87,15 +87,15 @@
                                 <div class="statistic-widget-box bg-info">
                                     <i class="fa fa-bar-chart"></i>
                                     <div class="content overflow-hidden">
-                                        <h1>19</h1>
-                                        <p>Pending Tasks</p>
+                                        <h1 id="moviesCount"></h1>
+                                        <p>Number of movies</p>
                                     </div>
                                 </div><!--statistic box end-->
                             </div><!--col end-->
                         </div>
                         <!--widget box row-->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 hidden">
                                 <div class="panel">
                                     <header class="panel-heading">
                                         <div class="panel-actions">
