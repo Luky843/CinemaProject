@@ -15,15 +15,35 @@ create table  users (idu int auto_increment,
 					
 
 create table movies (idm int auto_increment,
-					name varchar(30),
-					genre varchar(15),
+					name varchar(32),
+					genre varchar(32),
 					description text,
 					actors text,
 					year_ int,
-					img_url varchar(256),
+					img_url varchar(64),
 					is_available int default 1,
+					is_show_on_main int default 0,
+					is_popular int default 0,
 					primary key(idm)
 					);
+					
+create table movie_detail(id int auto_increment,
+							id_mov int,
+							name varchar(32),
+							title varchar(100),
+							decrioption_ text,
+							duration int,
+							country varchar(32),
+							directed_by varcahr(32),
+							actors text,
+							genre varchar(32),
+							video_url varchar(128);
+							primary key(id),
+							foreign key(id_mov) references movies(idm)
+							on update references
+							on delete cascade
+							);
+							
 					
 create table shows (ids int auto_increment,
 					idmov int,

@@ -378,6 +378,7 @@ function loadMovies()
                     item.appendChild(detail);
                     list.appendChild(item);
                 }
+
             }
         }
     }

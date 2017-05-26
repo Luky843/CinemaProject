@@ -12,7 +12,7 @@
 	function deleteUser($idu){
 		$db_cr = get_DB_config();
 		$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-		$sql = "update users set isDeleted='1' where id=".$idu.";";
+		$sql = "update users set isDeleted=1 where idu=".$idu.";";
 		$conn->query($sql);
 		$conn->close();
 	}

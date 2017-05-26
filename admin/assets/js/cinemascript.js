@@ -90,6 +90,7 @@ function getUsers() {
             {       
                 var table = document.getElementById("usersData");
                 var row = table.insertRow(table.rows.length);
+                row.id = "User_" + res[i].id;
 
                 var cell1 = row.insertCell(0);
                 cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
@@ -100,7 +101,7 @@ function getUsers() {
                 var cell4 = row.insertCell(3);
                 cell4.innerHTML = res[i].time_of_registration;
                 var cell5 = row.insertCell(4);
-			cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" id="user_'+res[i].id+'" onclick="DeleteRow(this)" aria-hidden="true" value="Delete"></i>'; 
+                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteRow('+row.id+')" aria-hidden="true" value="Delete"></i>';
             }
         }
     }
@@ -108,7 +109,11 @@ function getUsers() {
     xhttp.send();
 }
 
-function DeleteRow(argv,r) {
+function DeleteRow(argv) {
+    var u_id = argv.id;
+    u_id = u_id.split("_");
+    u_id = u_id[u_id.length - 1];
+
         swal({
             title: "Are you sure?",
             text: "You will not be able to recover this file!",
@@ -119,13 +124,12 @@ function DeleteRow(argv,r) {
             closeOnConfirm: false
         },
         function deleteRow() {
-			console.log(typeof r);
-			user_id = r.split("_");
-			user_id = user_id[user_id.length -1];
+
+
 			var xhttp = new XMLHttpRequest();
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("usersData").deleteRow(i);
-			xhttp.open("GET", "./php/deleteuser.php?user_id="+user_id);
+			var row = document.getElementById(argv.id);
+			row.parentElement.removeChild(row);
+            xhttp.open("GET", "./php/deleteuser.php?user_id=" + u_id);
 			xhttp.send();
             swal("Deleted!", "Current row has been deleted.", "success");
         });
