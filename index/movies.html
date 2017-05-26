@@ -69,7 +69,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-11 col-sm-offset-1">
-                        <h1>Action movies</h1>
+                        <h1>Please choose your favorite genre</h1>
                     </div>   
                 </div>
             </div>
@@ -77,6 +77,11 @@
         <section id="action" class="menu-section">
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1 form-group">
+                        <select class="form-control" id="sel1">
+                            <option id="genre">1</option>
+                        </select>
+                    </div>
                     <div class="col-sm-5 col-sm-offset-1">
                         <ul class="menu-style list-unstyled">
                             <li class="clearfix">
@@ -440,6 +445,55 @@
             <span>LTS Cinema. &copy; 2017</span>
         </footer>
 
+		   <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Seat reservation</h4>
+					<span id="movieid"></span>
+                </div>
+                <div class="modal-body">
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="font-size:50px; background-color:#bdbdbd; border-bottom:0;">Screen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border-top:0;"><img class="cinemaseat" src="img/seats/boxgray2.png" id="t1" onclick="zmen(this,1)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t2" onclick="zmen(this,2)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t3"  onclick="zmen(this,3)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t4"  onclick="zmen(this,4)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t5"  onclick="zmen(this,5)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t6"  onclick="zmen(this,6)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t7"  onclick="zmen(this,7)" /><img class="cinemaseat" src="img/seats/boxgray2.png"  id="t8"  onclick="zmen(this,8)" /><img class="cinemaseat" src="img/seats/boxgray2.png"  id="t9"  onclick="zmen(this,9)" /><img class="cinemaseat" src="img/seats/boxgray2.png"  id="t10"  onclick="zmen(this,10)" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:0;"><img class="cinemaseat" src="img/seats/boxgray2.png"  id="t11"  onclick="zmen(this,11)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t12"  onclick="zmen(this,12)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t13"  onclick="zmen(this,13)" /><img class="cinemaseat" src="img/seats/boxgray2.png" id="t14"  onclick="zmen(this,14)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t15"  onclick="zmen(this,15)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t16"  onclick="zmen(this,16)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t17"  onclick="zmen(this,17)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t18"  onclick="zmen(this,18)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t19"  onclick="zmen(this,19)"/><img class="cinemaseat" src="img/seats/boxgray2.png"  id="t20"  onclick="zmen(this,20)"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:0;"><img class="cinemaseat" src="img/seats/boxgray2.png" id="t21"  onclick="zmen(this,21)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t22"  onclick="zmen(this,22)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t23"  onclick="zmen(this,23)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t24"  onclick="zmen(this,24)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t25"  onclick="zmen(this,25)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t26"  onclick="zmen(this,26)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t27"  onclick="zmen(this,27)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t28"  onclick="zmen(this,28)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t29"  onclick="zmen(this,29)"/><img class="cinemaseat" src="img/seats/boxgray2.png" id="t30"  onclick="zmen(this,30)"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img class="cinemaseat" src="img/seats/boxgray2.png" /> 							Free ( <b><span id="free" function="showAvailability(free)"></span></b> )
+                                        <img style="padding-left:20px;" class="cinemaseat" src="img/seats/boxred1.png" /> 	Sold ( <b><span id="sold" function="showAvailability(sold)"></span></b> )
+                                        <img style="padding-left:20px;" class="cinemaseat" src="img/seats/boxblue1.png" /> 	Your reservation ( <b><span id="urreservation" function="showAvailability(urreservation)"></span></b> )
+                                    </td>                                
+                                </tr>
+                            </tbody>
+                        </table>
+                    <div class="text-center" style="color:red; font-size:30px;" id="error"></div>
+					<h2 class="text-center">Please enter your card number to complete your booking.</h2>
+					<div class="form-group">
+					  <input type="text" class="form-control" id="usr">
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+		</div>
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
         <!-- Bootstrap js-->
