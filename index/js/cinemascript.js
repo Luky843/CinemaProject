@@ -363,6 +363,7 @@ function loadMovies()
                 } else {
                     var list = document.getElementById("index_list_right");
                     var item = document.createElement("li");
+                    item.className = "clearfix";
                     var img = document.createElement("img");
 
                     img.src = res[i].img_url;
