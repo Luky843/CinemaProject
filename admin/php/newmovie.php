@@ -8,7 +8,7 @@ function get_DB_config()
 	return $x;
 }
 
-function createNewUser($name,$genre,$img_url,$actors,$year_,$description)
+function createNewMovie($name,$genre,$img_url,$actors,$year_,$description)
 {
 	$datetime = date("Y-m-d H:i:s");
 	$data_conf = get_DB_config();
@@ -27,7 +27,7 @@ function main()
 	$actors = $_GET["actors"];
 	$year_ = $_GET["year_"];
 	$img_url = $_GET["img_url"];
-	createNewUser($name,$genre,$img_url,$actors,$year_,$description);
+	createNewMovie($name,$genre,$img_url,$actors,$year_,$description);
 	echo "sadas##0";
 }
 main();
