@@ -72,35 +72,43 @@
                                         <form method="get" role="form">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" tabindex="1" class="form-control" id="name">
                                             </div>
                                             <div class="form-group">
                                                 <label>Genre</label>
-                                                <input type="text" class="form-control" placeholder="Action / Comedy..">
+                                                <input type="text" id="genre" tabindex="2" class="form-control" placeholder="Action / Comedy..">
                                             </div>
                                             <div class="form-group">
                                                 <label>IMG URL</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="img_url" tabindex="3">
                                                 <span class="help-block m-b-none">Our images are stored on server, please add here url.</span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Actors</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="actors" tabindex="4">
                                             </div>
                                             <div class="form-group">
                                                 <label>Date of create</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="moviedate" tabindex="5">
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea type="text" name="description" tabindex="10" rows="7" class="form-control" maxlength="2048"></textarea>
+                                                <textarea type="text" name="description" id="description" tabindex="6" rows="7" class="form-control" maxlength="2048"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-sm-offset-3">
+                                                        <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
+                                                        <input onclick="newmovie()" type="button" name="register-submit" id="newmovie-submit" tabindex="7" class="form-control btn btn-success" value="Submit">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-sm-12">
                                 <div class="panel">
                                     <header class="panel-heading">
@@ -116,8 +124,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div><!--container end-->
 

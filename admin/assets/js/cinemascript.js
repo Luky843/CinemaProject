@@ -114,7 +114,7 @@ function getMovies() {
                 var cell4 = row.insertCell(3);
                 cell4.innerHTML = res[i].actors;
                 var cell5 = row.insertCell(4);
-                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteRow(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
+                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteMovie(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
             }
         }
     }
@@ -184,6 +184,30 @@ function DeleteRow(argv) {
             swal("Deleted!", "Current row has been deleted.", "success");
         });
     }
+	
+function DeleteMovie(argv) {
+    var u_id = argv.id;
+    u_id = u_id.split("_");
+    u_id = u_id[u_id.length - 1];
+
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#F44336",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },
+        function deleteMovie() {
+			var xhttp = new XMLHttpRequest();
+			var row = document.getElementById(argv.id);
+			row.parentElement.removeChild(row);
+            xhttp.open("GET", "./php/deletemovie.php?movie_id=" + u_id);
+			xhttp.send();
+            swal("Deleted!", "Current row has been deleted.", "success");
+        });
+    }
 
 
 function user_registration() {
@@ -244,5 +268,44 @@ function user_registration() {
         }
     }
     xhttp.open("GET", "./php/registration.php?username=" + userName + "&password=" + password + "&email=" + email, true);
+    xhttp.send();
+}
+
+function newmovie() {
+    var name = document.getElementById("name").value;
+    var genre = document.getElementById("genre").value;
+    var img_url = document.getElementById("img_url").value;
+    var actors = document.getElementById("actors").value;
+    var moviedate = document.getElementById("moviedate").value;
+    var description = document.getElementById("description").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+
+            if (res == "0") {
+                document.getElementById("reg_succ").innerHTML = "New movie has been successfuly added!";
+                setTimeout(function () {
+                    document.getElementById("reg_succ").innerHTML = "";
+                }, 3 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "movies.html" }, 800);
+                });
+                document.getElementById("name").value = "";
+                document.getElementById("genre").value = "";
+                document.getElementById("img_url").value = "";
+                document.getElementById("actors").value = "";
+                document.getElementById("moviedate").value = "";
+                document.getElementById("description").value = "";
+                return;
+            }else {
+                alert("server err");
+            }
+        }
+    }
+    xhttp.open("GET", "./php/newmovie.php?name=" + name + "&genre=" + genre + "&img_url=" + img_url + "&actors=" + actors + "&moviedate=" + moviedate + "&description=" + description, true);
     xhttp.send();
 }
