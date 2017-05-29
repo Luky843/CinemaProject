@@ -420,8 +420,111 @@ function loadGenres()
                 opt.value = res[i];
                 document.getElementById("sel1").appendChild(opt);
             }
+            loadMovieBycategory(document.getElementById("sel1"));
         }
     }
     xhhp.open("GET", "./php/load_genres.php", true);
     xhhp.send();
+}
+
+function loadMovieBycategory(argv)
+{
+    var xhhp = new XMLHttpRequest();
+    xhhp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+           // res = [{ "id": "1", "name": "VOTRELEC: COVENANT", "description": "Ridley Scott sa vracia do vesm\u00edru, ktor\u00fd stvoril vo svojej kultovej s\u00e9rii Votrelec.", "actors": null, "year": "2017", "img_url": ".\/img\/movies\/1.jpg" }];
+            document.getElementById("mov_left").innerHTML = "";
+            document.getElementById("mov_right").innerHTML = "";
+
+            for (var i = 0; i < res.length; i++) {
+                if (i % 2 == 0) {
+                    var list = document.getElementById("mov_left");
+                } else {
+                    var list = document.getElementById("mov_right");
+                }
+                var item = document.createElement("li");
+                item.className = "clearfix";
+
+                var image = document.createElement("img");
+                image.src = res[i].img_url;
+                image.className = "img-responsive";
+                image.width = 90;
+                image.alt = "menu-img";
+                item.appendChild(image);
+
+                var div_ = document.createElement("div");
+                div_.className = "detail";
+                var p = document.createElement('h4');
+                p.innerHTML = res[i].name;
+                div_.appendChild(p);
+                p = document.createElement('p');
+                p.innerHTML = res[i].description;
+                div_.appendChild(p);
+
+                var d2 = document.createElement('div');
+                d2.className = "form-group";
+                d2.style = "padding-bottom:22px;";
+
+                var span = document.createElement('span');
+                span.className = "col-lg-5";
+                span.style = "margin-left:-15px;";
+
+                var li2 = document.createElement('select');
+                li2.className = "form-control margin-b-20";
+                li2.name = "account";
+                /************************************/
+                var shows = load_shows(res[i].id);
+                console.log(shows);
+                if (shows !== -1) {
+                    for (var j = 0; j < shows.length; i++) {
+                        var opt = document.createElement("option");
+                        opt.value = shows[j].ids;
+                        opt.innerHTML = shows[j].showtime;
+                        li2.appendChild(opt);
+                    }
+                }
+                span.appendChild(li2);
+                d2.appendChild(span);
+                div_.appendChild(d2);
+                div_.innerHTML += '<div class="col-sm-6 text-center" style="margin-left:-15px;">'+
+                                       ' <a data-toggle="modal" data-target="#myModal" onclick="showMovie(5)" class="btn btn-lg btn-yellow">Book now <i class="fa fa-angle-right"></i></a>'+
+                                   ' </div>'+
+                                   ' <span class="price">6.50€</span>';
+
+                item.appendChild(div_);
+
+                list.appendChild(item);
+            }
+        }
+    }
+    xhhp.open("GET", "./php/load_movies_by_genre.php?genre="+argv.value, true);
+    xhhp.send();
+}
+
+function load_shows(show)
+{
+    console.log(show);
+    var ret = 0;
+    var xhhp = new XMLHttpRequest();
+    xhhp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+          
+            if (res == "[]") {
+                ret = -1;
+            } else {
+                res = JSON.parse(res);
+                return res;
+            }
+        }
+    }
+    xhhp.open("GET", "./php/get_list_of_shows.php?film="+show, true);
+    xhhp.send();
+    return ret;
 }
