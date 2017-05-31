@@ -240,10 +240,10 @@ function user_registration() {
     var confirm_pasword = document.getElementById("confirm-password_").value;
 	var filter = /^[a-zA-Z ]{4,25}$/;
     if (!filter.test(userName)) {
-        document.getElementById("username_err_label").innerHTML = "Length of username must be longer than 4characters.";
+        document.getElementById("username_err_label").innerHTML = "Length of username must be longer than 4characters and must contains number,lowercase and uppercase letter.";
         setTimeout(function () {
             document.getElementById("username_err_label").innerHTML = "";
-        }, 2 * 1000);
+        }, 3 * 1000);
         return;
     }
     var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -256,10 +256,10 @@ function user_registration() {
     }
     var passfilter=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     if (!passfilter.test(password)){
-        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 8characters and contains number,lowercase and uppercase letter.";
+        document.getElementById("pass_err_label").innerHTML = "Length of password must be longer than 8characters and must contains number,lowercase and uppercase letter.";
         setTimeout(function () {
             document.getElementById("pass_err_label").innerHTML = "";
-        }, 2 * 1000);
+        }, 3 * 1000);
         return;
     }
     if (password != confirm_pasword) {
@@ -527,4 +527,59 @@ function load_shows(show)
     xhhp.open("GET", "./php/get_list_of_shows.php?film="+show, true);
     xhhp.send();
     return ret;
+}
+
+function loadShows()
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.status == 200 && this.readyState == 4) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+           
+            for (var i = 0; i < res.length; i++) {
+                var zoznam = document.getElementById("zoznam");
+                var polozka = document.createElement('li');
+                polozka.vaue = res[i].ids;
+                if (i % 2 == 0){
+                    polozka.className = "parna";
+                } else {
+                    polozka.className = "neparna";
+                }
+
+                var image = document.createElement('img');
+                image.height = 60;
+                image.width = 40;
+                image.src = res[i].img_url;
+                polozka.appendChild(image);
+
+                var h = document.createElement('b');
+                h.innerHTML = res[i].name;
+                polozka.appendChild(h);
+
+                var d = document.createElement('div');
+                d.innerHTML = res[i].description;
+                polozka.appendChild(d);
+
+                var cas = document.createElement('b');
+                cas.innerHTML = "showtime: " + res[i].showtime;
+                polozka.appendChild(cas);
+
+                var btn = document.createElement('button');
+                btn.innerHTML = "book show";
+                btn.setAttribute("onclick", "rezervuj(this)");
+                polozka.appendChild(btn);
+
+                zoznam.appendChild(polozka);
+            }
+        }
+    }
+    xhttp.open("GET", "./php/load_shows.php", true);
+    xhttp.send();
+}
+
+function rezervuj(argv) {
+    alert(argv.vaue);
 }
