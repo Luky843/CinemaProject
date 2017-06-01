@@ -84,7 +84,7 @@ function showAvailability(res) {
 }
 
 function showMovie(movie_id) {
-    filmID = movie_id;
+    filmID = movie_id.value;
     token = sessionStorage.getItem("token");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -113,7 +113,7 @@ function showMovie(movie_id) {
             showAvailability(res);
         }
     };
-    var url = "./php/get_list_of_seats.php?token=" + token + "&movie=" + movie_id;
+    var url = "./php/get_list_of_seats.php?token=" + token + "&movie=" + filmID;
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -360,7 +360,7 @@ function loadMovies()
             res = JSON.parse(res);
             for (var i = 0; i < res.length; i++) {
                 if (i % 2 == 0) {
-                    console.log("call left");
+                    //console.log("call left");
                     var list = document.getElementById("index_list_left");
                     var item = document.createElement("li");
                     item.className = "clearfix";
@@ -473,31 +473,35 @@ function loadMovieBycategory(argv)
                 span.className = "col-lg-5";
                 span.style = "margin-left:-15px;";
 
-                var li2 = document.createElement('select');
-                li2.className = "form-control margin-b-20";
-                li2.name = "account";
+                var select = document.createElement('select');
+                select.className = "form-control margin-b-20";
+                select.name = "account";
+                select.id = "select" + res[i].id;
+               // select.setAttribute("onload", "load_shows('" + select.id + "')");
                 /************************************/
-                var shows = load_shows(res[i].id);
+               /* var shows = load_shows(res[i].id);
                 console.log(shows);
                 if (shows !== -1) {
                     for (var j = 0; j < shows.length; i++) {
                         var opt = document.createElement("option");
                         opt.value = shows[j].ids;
                         opt.innerHTML = shows[j].showtime;
-                        li2.appendChild(opt);
+                        select.appendChild(opt);
                     }
-                }
-                span.appendChild(li2);
+                }*/
+                span.appendChild(select);
                 d2.appendChild(span);
                 div_.appendChild(d2);
-                div_.innerHTML += '<div class="col-sm-6 text-center" style="margin-left:-15px;">'+
-                                       ' <a data-toggle="modal" data-target="#myModal" onclick="showMovie(5)" class="btn btn-lg btn-yellow">Book now <i class="fa fa-angle-right"></i></a>'+
+                div_.innerHTML += '<div class="col-sm-6 text-center" style="margin-left:-15px;" id="div_film_'+res[i].id+'">'+
+                                     //  ' <a data-toggle="modal" data-target="#myModal" onclick="showMovie(5)" class="btn btn-lg btn-yellow">Book now <i class="fa fa-angle-right"></i></a>'+
                                    ' </div>'+
                                    ' <span class="price">6.50€</span>';
 
                 item.appendChild(div_);
 
                 list.appendChild(item);
+
+                load_shows(select.id, res[i].id, 'div_film_' + res[i].id);
             }
         }
     }
@@ -505,10 +509,10 @@ function loadMovieBycategory(argv)
     xhhp.send();
 }
 
-function load_shows(show)
+function load_shows(element_id,movie_id,btn_div_id)
 {
-    console.log(show);
-    var ret = 0;
+    //console.log(element_id + " " + movie_id);
+
     var xhhp = new XMLHttpRequest();
     xhhp.onreadystatechange = function () {
         if (this.status == 200 && this.readyState == 4) {
@@ -517,18 +521,27 @@ function load_shows(show)
             res = res[res.length - 1];
           
             if (res == "[]") {
-                ret = -1;
             } else {
                 res = JSON.parse(res);
-                return res;
+                var select = document.getElementById(element_id);
+                select.id = "mov_chose" + movie_id;
+                for (var i = 0; i < res.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = res[i].ids;
+                    option.innerHTML = res[i].showtime;
+                    select.appendChild(option);
+                }
+                var btn_div = document.getElementById(btn_div_id);
+                btn_div.innerHTML = '<a data-toggle="modal" data-target="#myModal" onclick="showMovie('+select.id+')" class="btn btn-lg btn-yellow">Book now <i class="fa fa-angle-right"></i></a>'
             }
         }
     }
-    xhhp.open("GET", "./php/get_list_of_shows.php?film="+show, true);
+    xhhp.open("GET", "./php/get_list_of_shows.php?film=" + movie_id, true);
     xhhp.send();
-    return ret;
 }
 
+
+//TEST
 function loadShows()
 {
     var xhttp = new XMLHttpRequest();
