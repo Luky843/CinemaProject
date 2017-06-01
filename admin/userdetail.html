@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="icon2.png" sizes="16x16">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Users - LTS Cinema</title>
+        <title>User - LTS Cinema</title>
 
         <!-- Bootstrap -->
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -17,15 +17,11 @@
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- dataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-         <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
-		 <!--SweetAlert-->
-		<script src="dist/sweetalert.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+          <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
         <!--template custom css file-->
         <link href="assets/css/style.css" rel="stylesheet">
 
         <script src="assets/js/modernizr.js"></script>
-        <script src="assets/js/sorttable.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -33,7 +29,8 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body onload="getUsers(); VerifyToken()">
+        <body onload="VerifyToken()">
+
 
         <!--side navigation start-->
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
@@ -70,40 +67,47 @@
                             <div class="col-md-12">
                                 <div class="panel">
                                     <header class="panel-heading">
-                                        <h2 class="panel-title">Users</h2>
+                                        <h2 class="panel-title">User detail</h2>
                                     </header>
-                                    <div class="col-md-12" style="padding:13px;">
-                                        <a href="newuser.html" type="button" title="Add new user" class="btn btn-success btn-circle btn-icon pull-right"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                    <div class="col-md-12" style="padding:13px;">
-                                        <div class="input-group col-md-3 pull-right">
-                                            <input type="text" id="search" onkeyup="Search()" class="form-control input-md" placeholder="Search in table by username" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-success btn-md" type="button">
-                                                    <i class="glyphicon glyphicon-search"></i>
-                                                </button>
-                                            </span>
-                                        </div> 
-                                    </div>
                                     <div class="panel-body">
-                                        <table id="usersData" class="table table-hover sortable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Username</th>
-                                                    <th>Isblocked</th>
-                                                    <th>Email</th>
-                                                    <th>Date</th>
-                                                    <th class="sorttable_nosort">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div><!--panel body end-->
-                                </div><!--end panel-->
-                            </div><!--col end-->
-                        </div><!--row end-->
+                                        <form method="get" role="form">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input type="text" name="username" id="username_" tabindex="1" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" name="email" id="email_" tabindex="2" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" name="password" id="password_" tabindex="3" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Date of registration</label>
+                                                <input type="text" name="username" id="time_of_regisration" tabindex="4" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Is Admin</label>
+                                                <input type="text" name="username" id="isAdmin" tabindex="5" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Is Blocked</label>
+                                                <input type="text" name="username" id="isBlocked" tabindex="6" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-sm-offset-3">
+                                                        <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
+                                                        <input onclick="user_registration()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-success" value="Save">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div><!--container end-->
 
                     <!--footer start-->
@@ -119,8 +123,6 @@
             </div>
         </div><!--end wrapper-->
 
-
-
         <!--Common plugins-->
         <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -128,15 +130,15 @@
         <script src="assets/plugins/pace/pace.min.js"></script>
         <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="assets/js/app.js"></script>
+        <script src="assets/js/cinemascript.js"></script>
 
         <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script src="assets/js/cinemascript.js"></script>
         <script>
             $(document).ready(function() {
-                $('#datatable').dataTable();
-            });
+        $('#datatable').dataTable();
+        });
         </script>
     </body>
 </html>

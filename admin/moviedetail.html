@@ -6,8 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="icon2.png" sizes="16x16">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>User - LTS Cinema</title>
-
+        <title>Movies - LTS Cinema</title>
         <!-- Bootstrap -->
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!--side menu plugin-->
@@ -18,10 +17,12 @@
         <!-- dataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
           <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
-        <!--template custom css file-->
+        <!--custom css file-->
         <link href="assets/css/style.css" rel="stylesheet">
-
         <script src="assets/js/modernizr.js"></script>
+        <!--dropzone-->
+        <link href="assets/plugins/dropzone/basic.css" rel="stylesheet">
+        <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -29,10 +30,8 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-        <body onload="VerifyToken()">
+    <body onload="VerifyToken()">
 
-
-        <!--side navigation start-->
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             
             <div id="hoeapp-container" hoe-color-type="lpanel-bg5" hoe-lpanel-effect="shrink">
@@ -67,30 +66,64 @@
                             <div class="col-md-12">
                                 <div class="panel">
                                     <header class="panel-heading">
-                                        <h2 class="panel-title">New user</h2>
+                                        <h2 class="panel-title">Movie detail</h2>
                                     </header>
                                     <div class="panel-body">
-                                        <form id="register-form" method="post" role="form">
+                                        <form method="get" role="form">
                                             <div class="form-group">
-                                                <input type="text" name="username" id="username_" tabindex="1" class="form-control" placeholder="Username" value="">
-                                                <span id="username_err_label" class="text-center" style="color:red;"></span>
-                                            </div>                                          
-                                            <div class="form-group">
-                                                <input type="password" name="password" id="password_" tabindex="2" class="form-control" placeholder="Password">
-                                                <span id="pass_err_label" class="text-center" style="color:red;"></span>
+                                                <label>Name</label>
+                                                <input type="text" tabindex="1" class="form-control" id="name">
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email_" tabindex="3" class="form-control" placeholder="Email Address" value="">
-                                                <span id="email_err_label" class="text-center" style="color:red;"></span>
+                                                <label>Genre</label>
+                                                <input type="text" id="genre" tabindex="2" class="form-control" placeholder="Action / Comedy..">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>IMG URL</label>
+                                                <input type="text" class="form-control" id="img_url" tabindex="3">
+                                                <span class="help-block m-b-none">Our images are stored on server, please add here url.</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Actors</label>
+                                                <input type="text" class="form-control" id="actors" tabindex="4">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Date of create</label>
+                                                <input type="text" class="form-control" id="moviedate" tabindex="5">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Is available</label>
+                                                <input type="text" id="is_available" tabindex="6" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea type="text" name="description" id="description" tabindex="7" rows="7" class="form-control" maxlength="2048"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
-                                                        <input onclick="user_registration()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-success" value="Register Now">
+                                                        <input onclick="newmovie()" type="button" name="register-submit" id="newmovie-submit" tabindex="7" class="form-control btn btn-success" value="Save">
                                                     </div>
                                                 </div>
                                             </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row hidden">
+                            <div class="col-sm-12">
+                                <div class="panel">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                        </div>
+                                        <h2 class="panel-title">Dropzone <span class="helping-text">Drag & drop file upload</span></h2>
+                                    </header>
+                                    <div class="panel-body">
+                                        <form id="my-awesome-dropzone" action="#" class="dropzone">
+                                            <button type="submit" class="btn btn-success rounded pull-right">Submit!</button>
                                         </form>
                                     </div>
                                 </div>
@@ -119,14 +152,17 @@
         <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/cinemascript.js"></script>
-
-        <!-- Datatables-->
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <!-- DROPZONE -->
+        <script src="assets/plugins/dropzone/dropzone.js"></script>
         <script>
-            $(document).ready(function() {
-        $('#datatable').dataTable();
-        });
+            $(document).ready(function () {
+                Dropzone.options.myAwesomeDropzone = {
+                    autoProcessQueue: false,
+                    uploadMultiple: true,
+                    parallelUploads: 100,
+                    maxFiles: 100
+                };
+            });
         </script>
     </body>
 </html>

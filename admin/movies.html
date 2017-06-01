@@ -9,14 +9,9 @@
         <title>Movies - LTS Cinema</title>
         <!-- Bootstrap -->
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!--side menu plugin-->
-        <link href="assets/plugins/hoe-nav/hoe.css" rel="stylesheet">
         <!-- icons-->
         <link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet">
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <!-- dataTables -->
-        <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-          <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
         <!--custom css file-->
         <link href="assets/css/style.css" rel="stylesheet">
         <script src="assets/js/modernizr.js"></script>
@@ -70,6 +65,16 @@
                                     <div class="col-md-12" style="padding:13px;">
                                         <a href="newmovie.html" type="button" title="Add new movie" class="btn btn-success btn-circle btn-icon pull-right"><i class="fa fa-plus"></i></a>
                                     </div>
+                                    <div class="col-md-12" style="padding:13px;">
+                                        <div class="input-group col-md-3 pull-right">
+                                            <input type="text" id="search" onkeyup="SearchMovies()" class="form-control input-md" placeholder="Search in table by name" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success btn-md" type="button">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div class="panel-body">
                                         <table id="movieData" class="table table-hover">
                                             <thead>
@@ -78,7 +83,7 @@
                                                     <th>Genre</th>
                                                     <th>Description</th>
                                                     <th>Actors</th>
-                                                    <th>Delete</th>
+                                                    <th class="sorttable_nosort">Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -110,13 +115,5 @@
         <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/cinemascript.js"></script>
-        <!-- Datatables-->
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#datatable').dataTable();
-            });
-        </script>
     </body>
 </html>
