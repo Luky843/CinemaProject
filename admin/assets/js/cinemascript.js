@@ -108,13 +108,13 @@ function getMovies() {
                 var cell1 = row.insertCell(0);
                 cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
                 var cell2 = row.insertCell(1);
-                cell2.innerHTML = '<b><span class="bigger">' + res[i].genre + '</span></b>';
+                cell2.innerHTML = '<b><span class="bigger">' + res[i].genre.toUpperCase() + '</span></b>';
                 var cell3 = row.insertCell(2);
                 cell3.innerHTML = res[i].description;
                 var cell4 = row.insertCell(3);
                 cell4.innerHTML = res[i].actors;
                 var cell5 = row.insertCell(4);
-                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteMovie(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
+                cell5.innerHTML = '<i class="fa fa-trash-o" style="font-size:1.3em; cursor:pointer; color:red;" onclick="DeleteMovie(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
             }
         }
     }
@@ -151,7 +151,7 @@ function getUsers() {
                 var cell4 = row.insertCell(3);
                 cell4.innerHTML = res[i].time_of_registration;
                 var cell5 = row.insertCell(4);
-                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer" onclick="DeleteRow('+row.id+')" aria-hidden="true" value="Delete"></i>';
+                cell5.innerHTML = '<i class="fa fa-trash-o red-500" style="font-size:1.3em; cursor:pointer; color:red;" onclick="DeleteRow(' + row.id + ')" aria-hidden="true" value="Delete"></i>';
             }
         }
     }
