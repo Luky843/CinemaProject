@@ -210,7 +210,7 @@ function getUsers() {
                 row.id = "User_" + res[i].id;
 
                 var cell1 = row.insertCell(0);
-                cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
+                cell1.innerHTML = '<b><a style="cursor:pointer;" onclick="redirectU(' + res[i].id + ')">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
                 var cell2 = row.insertCell(1);
                 cell2.innerHTML = '<b><span class="bigger">' + res[i].isblocked + '</span></b>';
                 var cell3 = row.insertCell(2);
@@ -223,6 +223,71 @@ function getUsers() {
         }
     }
     xhttp.open("GET", "./php/getusers.php");
+    xhttp.send();
+}
+
+function redirectU(id) {
+    localStorage.setItem('user_id', id);
+    window.location.href = "userdetail.html";
+}
+
+function getUdetail() {
+    user = localStorage.getItem('user_id');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+            document.getElementById("username_").value = res.username_;
+            document.getElementById("email_").value = res.email_;
+            document.getElementById("time_of_regisration").value = res.time_of_regisration;
+            document.getElementById("isAdmin").value = res.isAdmin;
+            document.getElementById("isBlocked").value = res.isBlocked;
+        }
+    };
+    var url = "./php/getuserdetail.php?user=" + user;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+function editUser() {
+    user = localStorage.getItem('user_id');
+    var username_ = document.getElementById("username_").value;
+    var email_ = document.getElementById("email_").value;
+    var time_of_regisration = document.getElementById("time_of_regisration").value;
+    var isAdmin = document.getElementById("isAdmin").value;
+    var isBlocked = document.getElementById("isBlocked").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+
+            if (res == "0") {
+                document.getElementById("reg_succ").innerHTML = "Edit successful!";
+                setTimeout(function () {
+                    document.getElementById("reg_succ").innerHTML = "";
+                }, 3 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "users.html" }, 800);
+                });
+                document.getElementById("name").value = "";
+                document.getElementById("genre").value = "";
+                document.getElementById("img_url").value = "";
+                document.getElementById("actors").value = "";
+                document.getElementById("moviedate").value = "";
+                document.getElementById("description").value = "";
+                return;
+            } else {
+                alert("server err");
+            }
+        }
+    }
+    xhttp.open("GET", "./php/edituser.php?username=" + userName + "&email=" + email + "&user=" + user, true);
     xhttp.send();
 }
 
