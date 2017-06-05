@@ -106,7 +106,7 @@ function getMovies() {
                 row.id = "User_" + res[i].id;
 
                 var cell1 = row.insertCell(0);
-                cell1.innerHTML = '<b><span class="bigger">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
+                cell1.innerHTML = '<b><a style="cursor:pointer;" onclick="redirect(' + res[i].id + ')">' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</a></b>';
                 var cell2 = row.insertCell(1);
                 cell2.innerHTML = '<b><span class="bigger">' + res[i].genre.toUpperCase() + '</span></b>';
                 var cell3 = row.insertCell(2);
@@ -119,6 +119,73 @@ function getMovies() {
         }
     }
     xhttp.open("GET", "./php/get_list_of_films.php");
+    xhttp.send();
+}
+function redirect(id) {
+    localStorage.setItem('movie_id', id);
+    window.location.href = "moviedetail.html";
+}
+
+function getMdetail() {
+    movie = localStorage.getItem('movie_id');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+            document.getElementById("name").value = res.name;
+            document.getElementById("genre").value = res.genre;
+            document.getElementById("description").value = res.description;
+            document.getElementById("actors").value = res.actors;
+            document.getElementById("moviedate").value = res.year;
+            document.getElementById("img_url").value = res.img_url;
+            document.getElementById("is_available").value = res.is_available;
+        }
+    };
+    var url = "./php/getmoviedetail.php?movie=" + movie;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+function editMovie() {
+    movie = localStorage.getItem('movie_id');
+    var name = document.getElementById("name").value;
+    var genre = document.getElementById("genre").value;
+    var img_url = document.getElementById("img_url").value;
+    var actors = document.getElementById("actors").value;
+    var moviedate = document.getElementById("moviedate").value;
+    var description = document.getElementById("description").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+
+            if (res == "0") {
+                document.getElementById("reg_succ").innerHTML = "Edit successful!";
+                setTimeout(function () {
+                    document.getElementById("reg_succ").innerHTML = "";
+                }, 3 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "movies.html" }, 800);
+                });
+                document.getElementById("name").value = "";
+                document.getElementById("genre").value = "";
+                document.getElementById("img_url").value = "";
+                document.getElementById("actors").value = "";
+                document.getElementById("moviedate").value = "";
+                document.getElementById("description").value = "";
+                return;
+            } else {
+                alert("server err");
+            }
+        }
+    }
+    xhttp.open("GET", "./php/editmovie.php?name=" + name + "&genre=" + genre + "&img_url=" + img_url + "&actors=" + actors + "&moviedate=" + moviedate + "&description=" + description + "&movie=" + movie, true);
     xhttp.send();
 }
 

@@ -30,7 +30,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body onload="VerifyToken()">
+    <body onload="VerifyToken(); getMdetail()">
 
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             
@@ -103,7 +103,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
-                                                        <input onclick="newmovie()" type="button" name="register-submit" id="newmovie-submit" tabindex="7" class="form-control btn btn-success" value="Save">
+                                                        <input onclick="editMovie()" type="button" name="register-submit" id="newmovie-submit" tabindex="7" class="form-control btn btn-success" value="Save">
                                                     </div>
                                                 </div>
                                             </div>
