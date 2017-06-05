@@ -477,3 +477,61 @@ function SearchMovies() {
         }
     }
 }
+
+function getUsersOnMain() {
+    var name = document.getElementById("name");
+    var email = document.getElementById("email");
+    var time_of_registration = document.getElementById("time_of_registration");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+            for (var i = 0; i < res.length; i++) {
+                var table = document.getElementById("usersMain");
+                var row = table.insertRow(table.rows.length);
+
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = '<b><span>' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = '<b><span class="bigger">' + res[i].email + '</span></b>';
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = res[i].time_of_registration;
+            }
+        }
+    }
+    xhttp.open("GET", "./php/getusersOnMain.php");
+    xhttp.send();
+}
+
+function getMoviesOnMain() {
+    var name = document.getElementById("name");
+    var genre = document.getElementById("genre");
+    var year = document.getElementById("year");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            res = JSON.parse(res);
+            for (var i = 0; i < res.length; i++) {
+                var table = document.getElementById("moviesMain");
+                var row = table.insertRow(table.rows.length);
+
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = '<b><span>' + res[i].name.charAt(0).toUpperCase() + res[i].name.slice(1) + '</span></b>';
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = '<b><span class="bigger">' + res[i].genre + '</span></b>';
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = res[i].year;
+            }
+        }
+    }
+    xhttp.open("GET", "./php/getMoviesOnMain.php");
+    xhttp.send();
+}

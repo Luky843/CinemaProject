@@ -24,7 +24,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body onload="VerifyToken(); getCounts(); getCountsMovies()">
+    <body onload="VerifyToken(); getCounts(); getCountsMovies(); getUsersOnMain(); getMoviesOnMain()">
         <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
             <!-- Static navbar -->
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -119,90 +119,24 @@
                                         <div class="panel-actions">
                                             <a href="javascript:void(0)" class="panel-action panel-action-toggle" data-panel-toggle=""></a>                                   
                                         </div>
-                                        <h2 class="panel-title">Recent orders</h2>
+                                        <h2 class="panel-title">Recent users</h2>
                                     </header>
                                     <div class="panel-body">
                                         <div class="scrollDiv">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped" id="usersMain">
                                                 <tbody><tr>
-                                                        <th><div>Status</div></th>
-                                                <th><div>Clients</div></th>
-                                                <th align="center"><div>Orders#</div></th>
-                                                <th align="center"><div>Date</div></th>
+                                                    <th><div>Username</div></th>
+                                                    <th><div>Email</div></th>
+                                                    <th><div>Date of create</div></th>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-success">Active</span>
-                                                    </td>
-                                                    <td>John Doe</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Today</span> 8:30</td>
+                                                    <td><span id="name"></span></td>
+                                                    <td><span id="email"></span></td>
+                                                    <td><span id="time_of_registration"></span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-success">Active</span>
-                                                    </td>
-                                                    <td>Thomas Bayer</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Today</span> 16:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-default">Inactive</span>
-                                                    </td>
-                                                    <td>Nicolas Karabat</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Yesterday</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-default">Unpaid</span>
-                                                        <span class="label label-default">Inactive</span>
-                                                    </td>
-                                                    <td>Alexandre Pome</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center">23th May</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-success">Active</span>
-                                                    </td>
-                                                    <td>John Doe</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Today</span> 8:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-success">Active</span>
-                                                    </td>
-                                                    <td>Thomas Bayer</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Today</span> 16:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-primary">Paid</span>
-                                                        <span class="label label-default">Inactive</span>
-                                                    </td>
-                                                    <td>Nicolas Karabat</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center"><span class="semibold">Yesterday</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-default">Unpaid</span>
-                                                        <span class="label label-default">Inactive</span>
-                                                    </td>
-                                                    <td>Alexandre Pome</td>
-                                                    <td align="center">7556588</td>
-                                                    <td class="color-blue-grey" nowrap="" align="center">23th May</td>
-                                                </tr>
-                                                </tbody></table>
+                                                
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div><!--end panel body-->
                                 </div><!--end panel-->
@@ -213,82 +147,23 @@
                                         <div class="panel-actions">
                                             <a href="javascript:void(0)" class="panel-action panel-action-toggle" data-panel-toggle=""></a>                                   
                                         </div>
-                                        <h2 class="panel-title">Recent Tickets</h2>
+                                        <h2 class="panel-title">Recent Movies</h2>
                                     </header>
                                     <div class="panel-body">
                                         <div class="scrollDiv">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped" id="moviesMain">
                                                 <tbody>
                                                     <tr>
-                                                        <th><div>Status</div></th>
-                                                <th><div>Subject</div></th>
-                                                <th align="center"><div>Department</div></th>
-                                                <th align="center"><div>Date</div></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-success">Open</span>
-                                                    </td>
-                                                    <td>Website time load</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Today</span> 8:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-success">Open</span>
-                                                    </td>
-                                                    <td>Database table format</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Today</span> 16:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-warning">Progress</span>
-                                                    </td>
-                                                    <td>Loosing control on server</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Yesterday</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-danger">Closed</span>
-                                                    </td>
-                                                    <td>Authorizations keys</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center">23th May</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-success">Open</span>
-                                                    </td>
-                                                    <td>Website down for one week</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Today</span> 8:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-success">Open</span>
-                                                    </td>
-                                                    <td>Restoring default settings</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Today</span> 16:30</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-warning">Progress</span>
-                                                    </td>
-                                                    <td>Loosing control on server</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center"><span class="semibold">Yesterday</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span class="label label-danger">Closed</span>
-                                                    </td>
-                                                    <td>Authorizations keys</td>
-                                                    <td align="center">Support</td>
-                                                    <td nowrap="" align="center">23th May</td>
-                                                </tr>
+                                                        <th><div>Name</div></th>
+                                                        <th><div>Genre</div></th>
+                                                        <th><div>Year</div></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span id="name"></span></td>
+                                                        <td><span id="genre"></span></td>
+                                                        <td><span id="year"></span></td>
+                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
