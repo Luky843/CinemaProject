@@ -2,31 +2,62 @@
 charset = "utf-8";
 var filmID = 1;
 
-function zmen(img_object,seatID) {
-    token = sessionStorage.getItem("token");
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var res = this.response;
-            res = res.split("##");
-            res = res[res.length - 1];
-            if (res == "RESERVE") {
-                img_object.src = "./img/seats/boxblue1.png";
-            }
-            if (res == "UNRESERVE") {
-                img_object.src = "./img/seats/boxgray2.png";
-            }
-            if (res == "NONE") {
-                document.getElementById("error").innerHTML = "This seat is already reserved!";
-                setTimeout(function (){
-                    document.getElementById("error").innerHTML = "";
-                }, 2 * 1000);
-            }
+function zmen(img_object, seatID) {
+    var usr_reserv_count = 0;
+    for (var i = 1; i <= 30; i++) {
+        var d = document.getElementById("t" + i);
+        if (d.src.indexOf("img/seats/boxyellow1.png") != -1 || d.src.indexOf("img/seats/boxblue1.png") != -1) {
+            usr_reserv_count++;
         }
-    };
-    var url = "./php/change_seat_status.php?token=" + token + "&movie=" + filmID + "&seat=" + seatID;
-    xhttp.open("GET", url, true);
-    xhttp.send();
+    }
+    while (true) {
+        if (img_object.src.indexOf("img/seats/boxyellow1.png") != -1) {
+            img_object.src = "img/seats/boxgray2.png";
+            usr_reserv_count--;
+            break;
+        }
+        if (img_object.src.indexOf("img/seats/boxblue1.png") != -1) {
+            img_object.src = "img/seats/boxgray2.png";
+            usr_reserv_count--;
+            break;
+        }
+        if (usr_reserv_count < 6 && img_object.src.indexOf("img/seats/boxgray2.png") != -1) {
+            img_object.src = "img/seats/boxyellow1.png";
+            usr_reserv_count++;
+            break;
+        }
+        break;
+    }
+    
+}
+
+function submit_seat_ch()
+{
+    var seat_arr = [];
+    for (var i = 0; i < 30; i++) {
+        var seat_elm = document.getElementById('t' + (i + 1));
+        if (seat_elm.src.indexOf("img/seats/boxgray2.png") != -1) {
+            seat_arr[i] = 1;
+        } else if (seat_elm.src.indexOf("img/seats/boxyellow1.png") != -1 || seat_elm.src.indexOf("img/seats/boxblue1.png") != -1) {
+            seat_arr[i] = 3;
+        } else {
+            seat_arr[i] = 0;
+        }
+    }
+    var t = sessionStorage.getItem('token');
+    var obj = {
+        showID : filmID,
+        token: t,
+        seats : seat_arr
+    }
+    obj = JSON.stringify(obj);
+    console.log(obj);
+    xhtp = new XMLHttpRequest();
+    xhtp.onreadystatechange = function () {
+
+    }
+    xhtp.open('POST', "./php/change_seat_status.php?x=" + obj, true);
+    xhtp.send();
 }
 
 /*

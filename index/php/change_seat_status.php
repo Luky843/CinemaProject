@@ -25,91 +25,58 @@ function getUserId($token)
 	$conn->close();
 	return $user_id;
 }
-function isUserAdmin($user_id)
-{
-	$db_cr = get_DB_config();
-	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "select * from users where idu=".$user_id.";";
-	$result = $conn->query($sql);
-	if($result->num_rows > 0)
-	{
-		if($rws = $result->fetch_assoc())
-		{
-			$isAdmin = $rws["isAdmin"];
-		}
-	}
-	$conn->close();
-	return $isAdmin;
-}
 
-function whoSeatUse($seat_num,$movieID)
+function check_DB($show_id,$user_id)
 {
+	$content = array();
 	$db_cr = get_DB_config();
 	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "select * from seats where num=".$seat_num." and show_ = ".$movieID.";";
+	$sql = "select * from seats where show_=".$show_id.";";
 	$result = $conn->query($sql);
-	if($result->num_rows > 0)
-	{
-		if($rws = $result->fetch_assoc())
-		{
-			$isUsed = $rws["isReseved"];
-			if ($isUsed == 0)
-			{
-				$conn->close();
-				return $isUsed;
+	while($row = $result->fetch_assoc()){
+		$isReseved = $row["isReseved"];
+		if ($isReseved == 0){
+			array_push($content,1);
+		}else{
+			$user = $row["usr"];
+			if ($user == $user_id){
+				array_push($content,3);
+			}else{
+				array_push($content,2);
 			}
-			$whoUse = $rws["usr"];
 		}
 	}
-	$conn->close();
-	return $whoUse;
-}
-function reserveSeat($movieID,$seat_num,$user_id)
-{
-	$db_cr = get_DB_config();
-	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "update seats set isReseved=1, usr=".$user_id." where num=".$seat_num." and show_=".$movieID.";";
-	$conn->query($sql);
-	$conn->close();
+	return $content;
 }
 
-function unReserve($movieID,$seat_num,$user_id)
+function over_write_seats($check_arr,$user_ID,$show,$new_arr)
 {
 	$db_cr = get_DB_config();
 	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "update seats set isReseved=0, usr=NULL where num=".$seat_num." and show_=".$movieID." and usr=".$user_id.";";
-	$conn->query($sql);
+	
+	for ($i =0 ; $i < 30; $i++){
+		if ($check_arr[$i] == 1 && $new_arr[$i] == 1)
+			continue;
+		if ($check_arr[$i] == 3 && $new_arr[$i] == 1){
+			$sql = "update seats set isReseved=0, usr=NULL where num=".($i +1)." and show_=".$show.";";
+			$conn->query($sql);
+		}else if ($check_arr[$i] == 1 && $new_arr[$i] == 3){
+			$sql = "update seats set isReseved=1, usr=".$user_ID." where num=".($i +1)." and show_=".$show.";";
+			$conn->query($sql);
+		}
+	}
 	$conn->close();
 }
 
 /*main******************************/
 function main()
 {
-	$token = $_GET["token"];
-	$movieID = $_GET["movie"];
-	$seat_num = $_GET["seat"];
+	$recived = $_GET["x"];
+	$recived = json_decode($recived);
+	$user_ID = getUserId($recived->token);
+	$check_arr = check_DB($recived->showID,$user_ID);
+	over_write_seats($check_arr,$user_ID,$recived->showID,$recived->seats);
 	
-	$user_id = getUserId($token);
-	if ($user_id == -1)
-	{
-		echo "dasd##ERR";
-		return;
-	}
-	$isAdmin = isUserAdmin($user_id);
-	$seatUsedby = whoSeatUse($seat_num,$movieID);
-	if($seatUsedby == 0)
-	{
-		reserveSeat($movieID,$seat_num,$user_id);
-		echo "sdf##RESERVE";
-		return;
-	}
-	elseif($seatUsedby == $user_id)
-	{
-		unReserve($movieID,$seat_num,$user_id);
-		echo "sds##UNRESERVE";
-		return;
-	}
-	echo "asdsa##NONE";
 
 }
 main();
