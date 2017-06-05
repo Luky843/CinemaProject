@@ -35,7 +35,7 @@ create table movie_detail(id int auto_increment,
 							decrioption_ text,
 							duration int,
 							country varchar(32),
-							directed_by varcahr(32),
+							directed_by varchar(32),
 							actors text,
 							genre varchar(32),
 							video_url varchar(128);
