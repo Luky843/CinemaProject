@@ -73,7 +73,7 @@
                                         <form method="get" role="form">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" name="username" id="username_" tabindex="1" class="form-control">
+                                                <input type="text" name="username" id="username_" tabindex="1" readonly style="background-color: #464552;" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Date of registration</label>
-                                                <input type="text" name="username" id="time_of_regisration" tabindex="4" class="form-control">
+                                                <input type="text" name="username" id="time_of_regisration" readonly style="background-color: #464552;" tabindex="4" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Is Admin</label>
@@ -95,7 +95,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
-                                                        <input onclick="user_registration()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-success" value="Save">
+                                                        <input onclick="edit_user()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-success" value="Save">
+                                                    </div>
+                                                    <div class="col-sm-6 col-sm-offset-3">
+                                                        <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
+                                                        <a href="users.html"> <input type="button" name="register-submit" tabindex="4" class="form-control btn btn-success" value="Cancel"></a>
                                                     </div>
                                                 </div>
                                             </div>
