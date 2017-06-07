@@ -240,9 +240,9 @@ function getUdetail() {
             res = res.split("##");
             res = res[res.length - 1];
             res = JSON.parse(res);
-            document.getElementById("username_").value = res.username_;
+            document.getElementById("username_").innerHTML = res.username_;
             document.getElementById("email_").value = res.email_;
-            document.getElementById("time_of_regisration").value = res.time_of_regisration;
+            document.getElementById("time_of_regisration").innerHTML = res.time_of_regisration;
             document.getElementById("isAdmin").value = res.isAdmin;
             document.getElementById("isBlocked").value = res.isBlocked;
         }
