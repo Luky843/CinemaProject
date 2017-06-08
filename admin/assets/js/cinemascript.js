@@ -142,6 +142,7 @@ function getMdetail() {
             document.getElementById("moviedate").value = res.year;
             document.getElementById("img_url").value = res.img_url;
             document.getElementById("is_available").value = res.is_available;
+            document.getElementById("is_show_on_main").value = res.is_show_on_main;
         }
     };
     var url = "./php/getmoviedetail.php?movie=" + movie;
@@ -158,8 +159,9 @@ function editMovie() {
     var year_ = document.getElementById("moviedate").value;
     var description = document.getElementById("description").value;
     var is_available = document.getElementById("is_available").value;
+    var is_show_on_main = document.getElementById("is_show_on_main").value;
     var dataM ={
-        name: name, genre: genre, img_url: img_url, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available
+        name: name, genre: genre, img_url: img_url, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available, is_show_on_main: is_show_on_main
     }
     dataM = JSON.stringify(dataM);
 
