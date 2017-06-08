@@ -25,7 +25,7 @@ function main()
 	$genre = $_GET["genre"];
 	$description = $_GET["description"];
 	$actors = $_GET["actors"];
-	$year_ = $_GET["year_"];
+	$year_ = $_GET["moviedate"];
 	$img_url = $_GET["img_url"];
 	createNewMovie($name,$genre,$img_url,$actors,$year_,$description);
 	echo "sadas##0";
