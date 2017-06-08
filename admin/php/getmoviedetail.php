@@ -23,6 +23,7 @@
 			$movie->genre = $row["genre"];
 			$movie->img_url = $row["img_url"];
 			$movie->is_available = $row["is_available"];
+			$movie->is_show_on_main = $row["is_show_on_main"];
 		}
 		$conn->close();
 		return $movie;

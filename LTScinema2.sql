@@ -22,7 +22,7 @@ create table movies (idm int auto_increment,
 					actors text,
 					year_ int,
 					img_url varchar(64),
-					is_available int default 0,
+					is_available int default 1,
 					is_show_on_main int default 0,
 					is_popular int default 0,
 					primary key(idm)

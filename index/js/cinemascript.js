@@ -501,7 +501,7 @@ function loadMovieBycategory(argv)
                 d2.style = "padding-bottom:22px;";
 
                 var span = document.createElement('span');
-                span.className = "col-lg-5";
+                span.className = "col-lg-7";
                 span.style = "margin-left:-15px;";
 
                 var select = document.createElement('select');
