@@ -175,9 +175,9 @@ function editMovie() {
                 setTimeout(function () {
                     document.getElementById("reg_succ").innerHTML = "";
                 }, 3 * 1000);
-                /*$(document).ready(function () {
+                $(document).ready(function () {
                     window.setTimeout(function () { window.location.href = "movies.html" }, 800);
-                });*/
+                });
                 document.getElementById("name").value = "";
                 document.getElementById("genre").value = "";
                 document.getElementById("img_url").value = "";
