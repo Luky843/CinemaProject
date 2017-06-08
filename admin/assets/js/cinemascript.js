@@ -567,10 +567,15 @@ function edit_user()
             res = res.split("##");
             res = res[res.length - 1];
             if (res == '0') {
-                alert('changeing succesfull');
-                window.location.href = "users.html";
+                document.getElementById("reg_succ").innerHTML = "Edit successful!";
+                setTimeout(function () {
+                    document.getElementById("reg_succ").innerHTML = "";
+                }, 3 * 1000);
+                $(document).ready(function () {
+                    window.setTimeout(function () { window.location.href = "users.html" }, 800);
+                });
             } else {
-                alert('changeing fail');
+                alert('Error!');
             }
 
             
