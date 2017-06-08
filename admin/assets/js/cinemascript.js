@@ -150,13 +150,18 @@ function getMdetail() {
 }
 
 function editMovie() {
-    movie = localStorage.getItem('movie_id');
+    var idm = localStorage.getItem('movie_id');
     var name = document.getElementById("name").value;
     var genre = document.getElementById("genre").value;
     var img_url = document.getElementById("img_url").value;
     var actors = document.getElementById("actors").value;
-    var moviedate = document.getElementById("moviedate").value;
+    var year_ = document.getElementById("moviedate").value;
     var description = document.getElementById("description").value;
+    var is_available = document.getElementById("is_available").value;
+    var dataM ={
+        name: name, genre: genre, img_url: img_url, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available
+    }
+    dataM = JSON.stringify(dataM);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -170,9 +175,9 @@ function editMovie() {
                 setTimeout(function () {
                     document.getElementById("reg_succ").innerHTML = "";
                 }, 3 * 1000);
-                $(document).ready(function () {
+                /*$(document).ready(function () {
                     window.setTimeout(function () { window.location.href = "movies.html" }, 800);
-                });
+                });*/
                 document.getElementById("name").value = "";
                 document.getElementById("genre").value = "";
                 document.getElementById("img_url").value = "";
@@ -185,7 +190,7 @@ function editMovie() {
             }
         }
     }
-    xhttp.open("GET", "./php/editmovie.php?name=" + name + "&genre=" + genre + "&img_url=" + img_url + "&actors=" + actors + "&moviedate=" + moviedate + "&description=" + description + "&movie=" + movie, true);
+    xhttp.open("GET", "./php/editmovie.php?x="+dataM, true);
     xhttp.send();
 }
 

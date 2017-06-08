@@ -37,9 +37,7 @@ function main()
 {
 	$data = $_GET["x"];
 	$data = json_decode($data);
-	var_dump($data);
 	$is_uniqu = is_email_unique($data->email,$data->uid);
-	var_dump($is_uniqu);
 	if (!$is_uniqu || $data->admin == "" || $data->blocked == ""){
 		echo "ads##-1";
 		return;
