@@ -535,3 +535,43 @@ function getMoviesOnMain() {
     xhttp.open("GET", "./php/getMoviesOnMain.php");
     xhttp.send();
 }
+
+function edit_user()
+{
+    var mail = document.getElementById("email_").value;
+    var is_admin = document.getElementById("isAdmin").value;
+    var is_blocked = document.getElementById("isBlocked").value;
+    var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!patern.test(mail)) {
+        alert('eml fail');
+        return;
+    }
+
+    var req = {
+        email: mail,
+        admin: is_admin,
+        blocked: is_blocked,
+        uid: localStorage.getItem('user_id')
+    }
+    req = JSON.stringify(req);
+
+    var xhthp = new XMLHttpRequest();
+    xhthp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.response;
+            res = res.split("##");
+            res = res[res.length - 1];
+            if (res == '0') {
+                alert('changeing succesfull');
+                window.location.href = "users.html";
+            } else {
+                alert('changeing fail');
+            }
+
+            
+        }
+    }
+    xhthp.open('GET', './php/edit_user.php?x=' + req, true);
+    xhthp.send();
+
+}
