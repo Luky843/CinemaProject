@@ -136,7 +136,9 @@ function getMdetail() {
             res = res[res.length - 1];
             res = JSON.parse(res);
             document.getElementById("name").value = res.name;
-            document.getElementById("genre").value = res.genre;
+			try{
+				document.getElementById("genre").value = res.genre;
+			}catch(err){}
             document.getElementById("description").value = res.description;
             document.getElementById("actors").value = res.actors;
             document.getElementById("moviedate").value = res.year;
@@ -153,7 +155,7 @@ function getMdetail() {
 function editMovie() {
     var idm = localStorage.getItem('movie_id');
     var name = document.getElementById("name").value;
-    var genre = document.getElementById("genre").value;
+    var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].text;
     var img_url = document.getElementById("img_url").value;
     var actors = document.getElementById("actors").value;
     var year_ = document.getElementById("moviedate").value;
@@ -164,7 +166,7 @@ function editMovie() {
         name: name, genre: genre, img_url: img_url, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available, is_show_on_main: is_show_on_main
     }
     dataM = JSON.stringify(dataM);
-
+	console.log(genre);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
