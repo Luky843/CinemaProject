@@ -248,8 +248,16 @@ function getUdetail() {
             document.getElementById("username_").innerHTML = res.username_;
             document.getElementById("email_").value = res.email_;
             document.getElementById("time_of_regisration").innerHTML = res.time_of_regisration;
-            document.getElementById("isAdmin").value = res.isAdmin;
-            document.getElementById("isBlocked").value = res.isBlocked;
+			if (res.isAdmin == "0"){
+				document.getElementById("admin_select").value = 0;
+			}else{
+				document.getElementById("admin_select").value = 1;
+			}
+			if (res.isBlocked == "0"){
+				document.getElementById("blocked_select").value = 0;
+			}else{
+				document.getElementById("blocked_select").value = 1;
+			}
         }
     };
     var url = "./php/getuserdetail.php?user=" + user;
@@ -544,8 +552,8 @@ function getMoviesOnMain() {
 function edit_user()
 {
     var mail = document.getElementById("email_").value;
-    var is_admin = document.getElementById("isAdmin").value;
-    var is_blocked = document.getElementById("isBlocked").value;
+    var is_admin = document.getElementById("admin_select").value;
+    var is_blocked = document.getElementById("blocked_select").value;
     var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!patern.test(mail)) {
         alert('eml fail');
