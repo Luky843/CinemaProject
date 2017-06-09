@@ -9,6 +9,7 @@
         <title>Movies - LTS Cinema</title>
         <!-- Bootstrap -->
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <!--side menu plugin-->
         <link href="assets/plugins/hoe-nav/hoe.css" rel="stylesheet">
         <!-- icons-->
@@ -130,6 +131,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="button" data-toggle="modal" data-target="#myModal" id="showtime" tabindex="8" class="form-control btn btn-success" value="Add showtime">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <div id="reg_succ" class="text-center" style="color:green; font-weight:bold; padding-bottom:10px;"></div>
                                                         <input onclick="editMovie()" type="button" name="register-submit" id="newmovie-submit" tabindex="7" class="form-control btn btn-success" value="Save">
@@ -140,23 +148,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row hidden">
-                            <div class="col-sm-12">
-                                <div class="panel">
-                                    <header class="panel-heading">
-                                        <div class="panel-actions">
-                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                                        </div>
-                                        <h2 class="panel-title">Dropzone <span class="helping-text">Drag & drop file upload</span></h2>
-                                    </header>
-                                    <div class="panel-body">
-                                        <form id="my-awesome-dropzone" action="#" class="dropzone">
-                                            <button type="submit" class="btn btn-success rounded pull-right">Submit!</button>
                                         </form>
                                     </div>
                                 </div>
@@ -177,6 +168,37 @@
             </div>
         </div><!--end wrapper-->
 
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="background-color:#1b1a26;">
+                    <div class="modal-header">
+                        <button style="color:white;" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Showtime</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="control-group">
+                            <label class="control-label">Please choose date and time of show</label>
+                            <div class="controls input-append date form_datetime" data-date="2017-06-01T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                <input size="40" type="text" value="" readonly>
+                                <span class="add-on"><i class="icon-remove"></i></span>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" value="" /><br />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Submit</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!--Common plugins-->
         <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -185,6 +207,41 @@
         <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/cinemascript.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.sk.js" charset="UTF-8"></script>
+        <script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'sk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'sk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+        </script>
         <!-- DROPZONE -->
         <script src="assets/plugins/dropzone/dropzone.js"></script>
         <script>
