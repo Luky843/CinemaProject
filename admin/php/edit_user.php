@@ -24,11 +24,11 @@ function is_email_unique($email,$user_id)
 	return $is_uniqu;
 }
 
-function overwrite($id,$email,$admin,$blocked)
+function overwrite($id,$email,$admin,$blocked,$password)
 {
 	$db_cr = get_DB_config();
 	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "update users set email='".$email."', isAdmin=".$admin.",isBlocked=".$blocked." where idu=".$id.";";
+	$sql = "update users set email='".$email."', isAdmin=".$admin.",isBlocked=".$blocked.",password='".$password."' where idu=".$id.";";
 	$conn->query($sql);
 	$conn->close();
 }
@@ -42,7 +42,7 @@ function main()
 		echo "ads##-1";
 		return;
 	}
-	overwrite($data->uid,$data->email,$data->admin,$data->blocked);
+	overwrite($data->uid,$data->email,$data->admin,$data->blocked,$data->password);
 	echo "dsfsd##0";
 }
 main();

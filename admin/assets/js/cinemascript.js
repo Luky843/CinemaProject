@@ -252,6 +252,8 @@ function getUdetail() {
             document.getElementById("username_").innerHTML = res.username_;
             document.getElementById("email_").value = res.email_;
             document.getElementById("time_of_regisration").innerHTML = res.time_of_regisration;
+            document.getElementById("password").value = res.password;
+
 			if (res.isAdmin == "0"){
 				document.getElementById("admin_select").value = 0;
 			}else{
@@ -266,45 +268,6 @@ function getUdetail() {
     };
     var url = "./php/getuserdetail.php?user=" + user;
     xhttp.open("GET", url, true);
-    xhttp.send();
-}
-
-function editUser() {
-    user = localStorage.getItem('user_id');
-    var username_ = document.getElementById("username_").value;
-    var email_ = document.getElementById("email_").value;
-    var time_of_regisration = document.getElementById("time_of_regisration").value;
-    var isAdmin = document.getElementById("isAdmin").value;
-    var isBlocked = document.getElementById("isBlocked").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var res = this.response;
-            res = res.split("##");
-            res = res[res.length - 1];
-
-            if (res == "0") {
-                document.getElementById("reg_succ").innerHTML = "Edit successful!";
-                setTimeout(function () {
-                    document.getElementById("reg_succ").innerHTML = "";
-                }, 3 * 1000);
-                $(document).ready(function () {
-                    window.setTimeout(function () { window.location.href = "users.html" }, 800);
-                });
-                document.getElementById("name").value = "";
-                document.getElementById("genre").value = "";
-                document.getElementById("img_url").value = "";
-                document.getElementById("actors").value = "";
-                document.getElementById("moviedate").value = "";
-                document.getElementById("description").value = "";
-                return;
-            } else {
-                alert("server err");
-            }
-        }
-    }
-    xhttp.open("GET", "./php/edituser.php?username=" + userName + "&email=" + email + "&user=" + user, true);
     xhttp.send();
 }
 
@@ -558,6 +521,7 @@ function edit_user()
     var mail = document.getElementById("email_").value;
     var is_admin = document.getElementById("admin_select").value;
     var is_blocked = document.getElementById("blocked_select").value;
+    var password = document.getElementById("password").value;
     var patern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!patern.test(mail)) {
         alert('eml fail');
@@ -566,6 +530,7 @@ function edit_user()
 
     var req = {
         email: mail,
+        password: password,
         admin: is_admin,
         blocked: is_blocked,
         uid: localStorage.getItem('user_id')
@@ -588,12 +553,9 @@ function edit_user()
                 });
             } else {
                 alert('Error!');
-            }
-
-            
+            }          
         }
     }
     xhthp.open('GET', './php/edit_user.php?x=' + req, true);
     xhthp.send();
-
 }

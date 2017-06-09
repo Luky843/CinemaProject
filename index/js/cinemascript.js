@@ -670,3 +670,12 @@ function shownhide() {
         x.style.display = 'none';
     }
 }
+
+function shownhidePass() {
+    var x = document.getElementById('passchange');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}

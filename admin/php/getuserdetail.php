@@ -18,6 +18,7 @@
 		if ($row = $result->fetch_assoc()){
 			$user->username_ = $row["name"];
 			$user->email_ = $row["email"];
+			$user->password = $row["password"];
 			$user->time_of_regisration = $row["time_of_regisration"];
 			$user->isAdmin = $row["isAdmin"];
 			$user->isBlocked = $row["isBlocked"];
