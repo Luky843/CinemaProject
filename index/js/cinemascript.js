@@ -629,7 +629,6 @@ function loadShows()
 
 function get_list_of_book()
 {
-	console.log('call');
 	var token = sessionStorage.getItem('token');
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function(){
@@ -649,6 +648,7 @@ function get_list_of_book()
 				var c2 = document.createElement('th');
 				c2.innerHTML = res[i].showtime;
 				var c3 = document.createElement('th');
+				c3.setAttribute('class','text-center');
 				c3.innerHTML = res[i].seat_num;
 				
 				row.appendChild(c1);
@@ -660,4 +660,13 @@ function get_list_of_book()
 	}
 	xhttp.open("GET","./php/get_booked_seats.php?token="+token,true);
 	xhttp.send();
+}
+
+function shownhide() {
+    var x = document.getElementById('movies');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
 }
