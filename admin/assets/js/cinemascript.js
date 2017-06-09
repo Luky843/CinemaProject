@@ -422,7 +422,7 @@ function user_registration() {
 
 function newmovie() {
     var name = document.getElementById("name").value;
-    var genre = document.getElementById("genre").value;
+    var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].text;
     var img_url = document.getElementById("img_url").value;
     var actors = document.getElementById("actors").value;
     var moviedate = document.getElementById("moviedate").value;
