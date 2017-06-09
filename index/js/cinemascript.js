@@ -228,7 +228,10 @@ function loggedUser() {
 }
 
 function showProfile() {
-    document.getElementById("profile").innerHTML = "My profile";
+	try{
+		document.getElementById("profile").innerHTML = "My profile";
+	}catch(err){}
+    
 }
 
 function getUsername() {
@@ -624,6 +627,37 @@ function loadShows()
     xhttp.send();
 }
 
-function rezervuj(argv) {
-    alert(argv.vaue);
+function get_list_of_book()
+{
+	console.log('call');
+	var token = sessionStorage.getItem('token');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if (this.status == 200 && this.readyState == 4){
+			var res = this.response;
+			res = res.split('##');
+			res = res[res.length -1];
+			if (res == "-1" || res == "[]"){
+				return;
+			}
+			res = JSON.parse(res);
+			var tab = document.getElementById("book_list");
+			for (var i=0; i< res.length;i++){
+				var row = document.createElement('tr');
+				var c1 = document.createElement('th');
+				c1.innerHTML = res[i].mov_name;
+				var c2 = document.createElement('th');
+				c2.innerHTML = res[i].showtime;
+				var c3 = document.createElement('th');
+				c3.innerHTML = res[i].seat_num;
+				
+				row.appendChild(c1);
+				row.appendChild(c2);
+				row.appendChild(c3);
+				tab.appendChild(row);
+			}
+		}
+	}
+	xhttp.open("GET","./php/get_booked_seats.php?token="+token,true);
+	xhttp.send();
 }
