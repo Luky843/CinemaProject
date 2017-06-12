@@ -142,7 +142,7 @@ function getMdetail() {
             document.getElementById("description").value = res.description;
             document.getElementById("actors").value = res.actors;
             document.getElementById("moviedate").value = res.year;
-            document.getElementById("img_url").value = res.img_url;
+            //document.getElementById("img_url").value = res.img_url;
             document.getElementById("is_available").value = res.is_available;
             document.getElementById("is_show_on_main").value = res.is_show_on_main;
         }
@@ -156,17 +156,24 @@ function editMovie() {
     var idm = localStorage.getItem('movie_id');
     var name = document.getElementById("name").value;
     var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].text;
-    var img_url = document.getElementById("img_url").value;
+    var img_url = document.getElementById("img_url");
     var actors = document.getElementById("actors").value;
     var year_ = document.getElementById("moviedate").value;
     var description = document.getElementById("description").value;
     var is_available = document.getElementById("is_available").value;
     var is_show_on_main = document.getElementById("is_show_on_main").value;
     var dataM ={
-        name: name, genre: genre, img_url: img_url, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available, is_show_on_main: is_show_on_main
+        name: name, genre: genre, actors: actors, year_: year_, description: description, idm: idm, is_available: is_available, is_show_on_main: is_show_on_main
     }
+	
     dataM = JSON.stringify(dataM);
-	console.log(genre);
+	var foromData = new FormData();
+	
+	foromData.append('x',dataM);
+	if(typeof img_url.files[0] != 'undefined'){
+		foromData.append('img',img_url.files[0],img_url.files[0].name);
+	}
+	
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -180,22 +187,22 @@ function editMovie() {
                     document.getElementById("reg_succ").innerHTML = "";
                 }, 3 * 1000);
                 $(document).ready(function () {
-                    window.setTimeout(function () { window.location.href = "movies.html" }, 800);
+                   // window.setTimeout(function () { window.location.href = "movies.html" }, 800);
                 });
-                document.getElementById("name").value = "";
+               /* document.getElementById("name").value = "";
                 document.getElementById("genre").value = "";
                 document.getElementById("img_url").value = "";
                 document.getElementById("actors").value = "";
                 document.getElementById("moviedate").value = "";
-                document.getElementById("description").value = "";
+                document.getElementById("description").value = "";*/
                 return;
             } else {
                 alert("server err");
             }
         }
     }
-    xhttp.open("GET", "./php/editmovie.php?x="+dataM, true);
-    xhttp.send();
+    xhttp.open("POST", "./php/editmovie.php?x", true);
+    xhttp.send(foromData);
 }
 
 function getUsers() {
