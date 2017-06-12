@@ -27,7 +27,7 @@ function main()
 	$actors = $_POST["actors"];
 	$year_ = $_POST["moviedate"];
 	$image = $_FILES["img_url"];
-	$img_path = $_SERVER['DOCUMENT_ROOT'] . '/LTScinemaV2/index/img/movies/'.$image['name']; // na servery odstranit '/LTScinemaV2'
+	$img_path = $_SERVER['DOCUMENT_ROOT'] . '/index/img/movies/'.$image['name']; // na servery odstranit '/LTScinemaV2'
 	$img_url = './img/movies/'.$image['name'];
 	createNewMovie($name,$genre,$img_url,$actors,$year_,$description);
 	move_uploaded_file($image['tmp_name'],$img_path);
