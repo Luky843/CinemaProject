@@ -35,6 +35,8 @@ function add_show($showtime,$movie_id)
 	$result = $conn->query($sql);
 	if($result){
 		$succes = true;
+		$sql = "update movies set is_show_on_main=1 where idm = ".$movie_id.";";
+		$conn->query($sql);
 	}else{
 		$succes = false;
 	}
