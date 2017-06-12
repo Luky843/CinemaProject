@@ -13,7 +13,7 @@ function getUserId($token)
 	$user_id = -1;
 	$db_cr = get_DB_config();
 	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "select users.idu from users inner join token on users.idu = token.idu where token.value_ like'".$token."' and token.isExpired = 0 and users.isAdmin = 1 and users.isBlocked = 0 and users.isDeleted = 0;";
+	$sql = "select users.idu from users inner join token on users.idu = token.idu where token.value_ like'".$token."' and token.isExpired = 0 and users.isAdmin = 1 and users.isBlocked = 0;";
 	$result = $conn->query($sql);
 	if($result->num_rows > 0)
 	{
@@ -57,6 +57,7 @@ function get_id_of_new_show($movie_id)
 	$conn->close();
 	return $id;
 }
+
 function generate_seats($new_show_id)
 {
 	$db_cr = get_DB_config();
