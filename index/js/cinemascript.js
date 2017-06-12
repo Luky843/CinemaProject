@@ -2,7 +2,17 @@
 charset = "utf-8";
 var filmID = 1;
 
+function VerifyToken() {
+    if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2' || sessionStorage.getItem("token") == null) {
+        window.location.href = "./page-404.html";
+    };
+}
+
 function zmen(img_object, seatID) {
+    if (sessionStorage.getItem("token") == '' || sessionStorage.getItem("token") == '-1' || sessionStorage.getItem("token") == '-2' || sessionStorage.getItem("token") == null) {
+        document.getElementById("error").innerHTML = "Please <a href=\"login.html\">LOGIN</a> to manage your reservation.";
+        return;
+    };
     var usr_reserv_count = 0;
     for (var i = 1; i <= 30; i++) {
         var d = document.getElementById("t" + i);
