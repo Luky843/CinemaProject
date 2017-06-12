@@ -241,7 +241,7 @@ function redirectU(id) {
 }
 
 function getUdetail() {
-    user = localStorage.getItem('user_id');
+    user = localStorage.getItem('movie_id');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -386,10 +386,19 @@ function user_registration() {
 function newmovie() {
     var name = document.getElementById("name").value;
     var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].text;
-    var img_url = document.getElementById("img_url").value;
+    var img_url = document.getElementById("img_url");
     var actors = document.getElementById("actors").value;
     var moviedate = document.getElementById("moviedate").value;
     var description = document.getElementById("description").value;
+	
+	var form_data = new FormData();
+	form_data.append('name',name);
+	form_data.append('genre',genre);
+	form_data.append('img_url',img_url.files[0], img_url.files[0].name);
+	form_data.append('actors',actors);
+	form_data.append('moviedate',moviedate);
+	form_data.append('description',description);
+	console.log(form_data);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -406,20 +415,20 @@ function newmovie() {
                 $(document).ready(function () {
                     window.setTimeout(function () { window.location.href = "movies.html" }, 800);
                 });
-                document.getElementById("name").value = "";
+               /* document.getElementById("name").value = "";
                 document.getElementById("genre").value = "";
                 document.getElementById("img_url").value = "";
                 document.getElementById("actors").value = "";
                 document.getElementById("moviedate").value = "";
-                document.getElementById("description").value = "";
+                document.getElementById("description").value = "";*/
                 return;
             }else {
                 alert("server err");
             }
         }
     }
-    xhttp.open("GET", "./php/newmovie.php?name=" + name + "&genre=" + genre + "&img_url=" + img_url + "&actors=" + actors + "&moviedate=" + moviedate + "&description=" + description, true);
-    xhttp.send();
+    xhttp.open("POST", "./php/newmovie.php", true);
+    xhttp.send(form_data);
 }
 
 function Search() {
@@ -558,4 +567,42 @@ function edit_user()
     }
     xhthp.open('GET', './php/edit_user.php?x=' + req, true);
     xhthp.send();
+}
+
+function add_show_time()
+{
+	var date = document.getElementById('date_picker');
+	var parts = date.value.split(/[\s|\s-\s|:]/);
+	var dat = parts[2] + "-";
+	switch(parts[1]){
+		case "January" : dat += "1-"; break;
+		case "February" : dat += "2-"; break;
+		case "March" : dat += "3-";break;
+		case "April" : dat += "4-";break;
+		case "May" : dat += "5-";break;
+		case "June" : dat += "6-";break;
+		case "July" : dat += "6-";break;
+		case "August" : dat += "8-";break;
+		case "September" : dat += "9-";break;
+		case "October" : dat += "10-";break;
+		case "November" : dat += "11-";break;
+		case "December" : dat += "12-";break;
+	} 
+	dat += parts[0] + " ";
+	var p = parseInt(parts[5]);
+	if (parts[7] == "pm" && p != 12)
+		p += 12;
+	else if(parts[7] == "am" && p == 12)
+		p = 0;
+	dat += p + ":";
+	dat += parts[6] + ":00";
+	//console.log(dat);
+	/**END OF DATE PARSER**/
+	var token = sessionStorage.getItem('token');
+	var uid = localStorage.getItem('movie_id');
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){}
+	xhttp.open('POST','./php/add_show.php?token='+token+'&showtime='+dat+'&movie_id='+uid,true);
+	xhttp.send();
+	
 }

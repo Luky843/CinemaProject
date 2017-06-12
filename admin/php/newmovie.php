@@ -21,12 +21,14 @@ function createNewMovie($name,$genre,$img_url,$actors,$year_,$description)
 function main()
 {
 	date_default_timezone_set('Europe/Bratislava');
-	$name = $_GET["name"];
-	$genre = $_GET["genre"];
-	$description = $_GET["description"];
-	$actors = $_GET["actors"];
-	$year_ = $_GET["moviedate"];
-	$img_url = $_GET["img_url"];
+	$name = $_POST["name"];
+	$genre = $_POST["genre"];
+	$description = $_POST["description"];
+	$actors = $_POST["actors"];
+	$year_ = $_POST["moviedate"];
+	$image = $_FILES["img_url"];
+	$img_path = $_SERVER['DOCUMENT_ROOT'] . '/LTScinemaV2/index/img/movies/'.$image['name'];
+	$img_url = './img/movies/'.$image['name'];
 	createNewMovie($name,$genre,$img_url,$actors,$year_,$description);
 	echo "sadas##0";
 }

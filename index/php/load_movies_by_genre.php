@@ -15,7 +15,7 @@ function load_films($genre)
 	
 	$db_cr = get_DB_config();
 	$conn = new mysqli($db_cr[0],$db_cr[1],$db_cr[2],$db_cr[3]);
-	$sql = "select * from movies where is_show_on_main=1 and genre like'".$genre."';";
+	$sql = "select * from movies where genre like'".$genre."';";
 	$result = $conn->query($sql);
 	while ($row = $result->fetch_assoc()){
 		$movie = new StdClass();
